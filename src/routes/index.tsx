@@ -38,18 +38,31 @@ function Home() {
           <div className="absolute -top-24 -right-24 size-[460px] rounded-full bg-neon-purple/25 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-28 -left-24 size-[360px] rounded-full bg-neon-blue/25 blur-3xl pointer-events-none" />
 
-          <div className="relative grid md:grid-cols-[1.1fr_1fr] gap-6 items-center p-6 sm:p-10">
+          <div className="relative grid md:grid-cols-[1.2fr_1fr] gap-6 items-center p-6 sm:p-10">
             <div className="relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-cyan/10 border border-neon-cyan/40 text-neon-cyan text-[11px] font-semibold mb-5 backdrop-blur">
                 <span className="size-1.5 rounded-full bg-neon-cyan pulse-dot text-neon-cyan" />
                 AI OPERATING SYSTEM · v1.0
               </div>
-              <p className="text-sm text-muted-foreground mb-2 tracking-widest uppercase">Welcome back</p>
-              <h1 className="font-display font-extrabold tracking-tighter leading-[0.92] text-[clamp(2.6rem,7vw,5.5rem)]">
-                <span className="text-gradient text-glow">HN-AI</span>
-                <Crown className="inline size-7 ml-3 text-neon-orange -translate-y-3" />
-              </h1>
-              <p className="mt-4 text-lg text-foreground/85 max-w-md">
+              <p className="text-sm text-muted-foreground mb-3 tracking-widest uppercase">Welcome back to</p>
+
+              {/* Logo + Gold wordmark lockup */}
+              <div className="flex items-center gap-4 sm:gap-5 flex-wrap">
+                <div className="relative shrink-0">
+                  <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle,oklch(0.85_0.18_80/0.45),transparent_70%)] blur-xl" />
+                  <img
+                    src={logoImg}
+                    alt="HN-AI"
+                    className="relative size-20 sm:size-24 object-contain rounded-2xl float"
+                    style={{ mixBlendMode: "screen" }}
+                  />
+                </div>
+                <h1 className="font-display font-extrabold tracking-tighter leading-[0.9] text-[clamp(2.8rem,8vw,5.8rem)]">
+                  <span className="text-gold text-gold-glow">HN-AI</span>
+                </h1>
+              </div>
+
+              <p className="mt-5 text-lg text-foreground/85 max-w-md">
                 Master the future with AI<br />
                 <span className="text-muted-foreground">in just <b className="text-neon-cyan">10 minutes</b> a day.</span>
               </p>
@@ -71,13 +84,14 @@ function Home() {
               </div>
             </div>
 
-            {/* HERO LOGO */}
+            {/* Large showcase logo */}
             <div className="relative hidden md:flex items-center justify-center min-h-[340px]">
-              <div className="absolute inset-0 hologram opacity-40 blur-2xl" />
+              <div className="absolute inset-8 rounded-full bg-[radial-gradient(circle,oklch(0.65_0.27_305/0.45),transparent_65%)] blur-2xl" />
+              <div className="absolute inset-16 rounded-full bg-[radial-gradient(circle,oklch(0.85_0.18_80/0.25),transparent_60%)] blur-xl" />
               <img
                 src={logoImg}
                 alt="HN-AI logo"
-                className="relative w-full max-w-[420px] aspect-square object-contain float drop-shadow-[0_0_40px_oklch(0.65_0.27_305/0.55)]"
+                className="relative w-full max-w-[420px] aspect-square object-contain float-slow drop-shadow-[0_0_60px_oklch(0.65_0.27_305/0.6)]"
                 style={{ mixBlendMode: "screen" }}
               />
             </div>
