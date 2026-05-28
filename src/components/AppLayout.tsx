@@ -1,4 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
+import { Toaster } from "sonner";
 import {
   Home, Target, Route as RouteIcon, BookOpen, Sparkles, Rocket,
   ListChecks, Trophy, Wrench, User as UserIcon, Crown, Zap, Bell, Search,
