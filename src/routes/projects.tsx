@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { miniProjects } from "@/lib/data/mockData";
 import { useUser } from "@/hooks/use-user";
+import { useContent } from "@/hooks/use-content";
 import { completeProject } from "@/lib/services/userService";
 import { Check, Rocket } from "lucide-react";
 import { toast } from "sonner";
@@ -12,6 +12,7 @@ export const Route = createFileRoute("/projects")({
 
 function Projects() {
   const user = useUser();
+  const { projects: miniProjects } = useContent();
   return (
     <div className="space-y-6">
       <header className="glass-strong rounded-3xl p-6 border-neon-orange/30 relative overflow-hidden">

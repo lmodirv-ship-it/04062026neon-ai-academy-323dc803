@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { quizQuestions } from "@/lib/data/mockData";
 import { useState } from "react";
 import { Check, X, Sparkles, Trophy, RotateCcw } from "lucide-react";
 import { completeQuiz } from "@/lib/services/userService";
+import { useContent } from "@/hooks/use-content";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({ meta: [{ title: "Quiz & Challenges — HN-AI" }, { name: "description", content: "Test your AI knowledge and earn XP." }] }),
@@ -10,6 +10,7 @@ export const Route = createFileRoute("/quiz")({
 });
 
 function Quiz() {
+  const { quiz: quizQuestions } = useContent();
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [score, setScore] = useState(0);

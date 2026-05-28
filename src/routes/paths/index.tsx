@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { learningPaths } from "@/lib/data/mockData";
 import { PathCard } from "@/components/PathCard";
+import { useContent } from "@/hooks/use-content";
 
 export const Route = createFileRoute("/paths/")({
   head: () => ({ meta: [{ title: "Learning Paths — HN-AI" }, { name: "description", content: "Curated AI learning paths from beginner to advanced." }] }),
@@ -8,6 +8,7 @@ export const Route = createFileRoute("/paths/")({
 });
 
 function Paths() {
+  const { paths } = useContent();
   return (
     <div className="space-y-6">
       <header className="glass-strong rounded-3xl p-6 border-neon-purple/30 relative overflow-hidden">
@@ -16,7 +17,7 @@ function Paths() {
         <p className="text-muted-foreground mt-2 max-w-xl">Curated journeys, from zero to AI engineer. Pick one and we'll handle the daily 10-minute structure.</p>
       </header>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-        {learningPaths.map((p) => <PathCard key={p.id} path={p} />)}
+        {paths.map((p) => <PathCard key={p.id} path={p} />)}
       </div>
     </div>
   );
