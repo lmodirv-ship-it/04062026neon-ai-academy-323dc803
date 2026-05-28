@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, Play, Crown, Flame, Star, Trophy, BookOpen, Rocket, ListChecks, TrendingUp, ChevronRight, Zap, Quote } from "lucide-react";
+import logoImg from "@/assets/hn-ai-logo.jpg";
 import { learningPaths, aiQuotes, trendingTools, missions } from "@/lib/data/mockData";
 import { PathCard } from "@/components/PathCard";
 import { StatTile } from "@/components/StatTile";
 import { Particles } from "@/components/Particles";
-import { AIHologram } from "@/components/AIHologram";
 import { XPBar } from "@/components/XPBar";
 import { useUser } from "@/hooks/use-user";
 import { getLevelInfo } from "@/lib/services/userService";
@@ -71,9 +71,15 @@ function Home() {
               </div>
             </div>
 
-            {/* AI HOLOGRAM */}
+            {/* HERO LOGO */}
             <div className="relative hidden md:flex items-center justify-center min-h-[340px]">
-              <AIHologram size={340} />
+              <div className="absolute inset-0 hologram opacity-40 blur-2xl" />
+              <img
+                src={logoImg}
+                alt="HN-AI logo"
+                className="relative w-full max-w-[420px] aspect-square object-contain float drop-shadow-[0_0_40px_oklch(0.65_0.27_305/0.55)]"
+                style={{ mixBlendMode: "screen" }}
+              />
             </div>
           </div>
         </section>
