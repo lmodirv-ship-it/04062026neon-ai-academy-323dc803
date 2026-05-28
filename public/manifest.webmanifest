@@ -1,0 +1,13 @@
+{
+  "name": "HN-AI — Learn AI in 10 Minutes a Day",
+  "short_name": "HN-AI",
+  "description": "Master the future with AI in just 10 minutes a day.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0a1f",
+  "theme_color": "#0b0a1f",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
