@@ -71,9 +71,15 @@ function Home() {
               </div>
             </div>
 
-            {/* AI HOLOGRAM */}
+            {/* HERO LOGO */}
             <div className="relative hidden md:flex items-center justify-center min-h-[340px]">
-              <AIHologram size={340} />
+              <div className="absolute inset-0 hologram opacity-40 blur-2xl" />
+              <img
+                src={logoImg}
+                alt="HN-AI logo"
+                className="relative w-full max-w-[420px] aspect-square object-contain float drop-shadow-[0_0_40px_oklch(0.65_0.27_305/0.55)]"
+                style={{ mixBlendMode: "screen" }}
+              />
             </div>
           </div>
         </section>
