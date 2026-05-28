@@ -35,6 +35,14 @@ function Playground() {
     }, 900);
   };
 
+  const improve = () => {
+    if (!prompt.trim()) return;
+    const base = prompt.trim().replace(/\.$/, "");
+    const improved = `[Context] You are helping a learner on HN-AI.\n[Role] Act as a senior AI mentor.\n[Instruction] ${base}\n[Specifics] Use 3 numbered bullets. Each under 20 words.\n[Polish] Friendly, confident, and concrete with one real example.`;
+    setPrompt(improved);
+  };
+
+
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       <header className="glass-strong rounded-3xl p-6 border-neon-cyan/30 relative overflow-hidden">
@@ -66,12 +74,17 @@ function Playground() {
           placeholder="Type your prompt… e.g. 'Act as an AI tutor. Explain reinforcement learning in 3 bullets for a beginner.'"
           className="w-full bg-transparent text-sm placeholder:text-muted-foreground focus:outline-none resize-none"
         />
-        <div className="flex items-center justify-between mt-3">
+        <div className="flex items-center justify-between mt-3 gap-2 flex-wrap">
           <div className="text-xs text-muted-foreground">{prompt.length} chars</div>
-          <button onClick={run} disabled={loading} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-neon-purple to-neon-blue text-white font-semibold glow-purple hover:scale-105 transition disabled:opacity-60">
-            {loading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
-            {loading ? "Thinking…" : "Generate"}
-          </button>
+          <div className="flex items-center gap-2">
+            <button onClick={improve} disabled={!prompt.trim()} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass border-neon-cyan/40 text-neon-cyan font-semibold text-sm hover:bg-neon-cyan/10 transition disabled:opacity-50">
+              <Wand2 className="size-4" /> Improve Prompt
+            </button>
+            <button onClick={run} disabled={loading} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-neon-purple to-neon-blue text-white font-semibold glow-purple hover:scale-105 transition disabled:opacity-60">
+              {loading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+              {loading ? "Thinking…" : "Generate"}
+            </button>
+          </div>
         </div>
       </div>
 
