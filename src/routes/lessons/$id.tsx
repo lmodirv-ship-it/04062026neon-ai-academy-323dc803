@@ -65,7 +65,7 @@ function LessonView() {
       <section className="glass rounded-2xl p-6">
         <h2 className="font-display font-bold text-xl mb-3">Prompt Examples — Try Them Now</h2>
         <div className="space-y-2">
-          {lesson.promptExamples.map((p, i) => (
+          {lesson.promptExamples.map((p: string, i: number) => (
             <div key={i} className="rounded-xl p-4 border border-neon-purple/30 bg-neon-purple/5 text-sm">
               <span className="text-neon-purple font-semibold mr-2">{i + 1}.</span>{p}
             </div>
