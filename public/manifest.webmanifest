@@ -1,13 +1,27 @@
 {
   "name": "HN-AI — Learn AI in 10 Minutes a Day",
   "short_name": "HN-AI",
-  "description": "Master the future with AI in just 10 minutes a day.",
-  "start_url": "/",
+  "id": "/?source=pwa",
+  "description": "Master the future of AI in just 10 minutes a day. Daily missions, learning paths, AI playground, and projects.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#0b0a1f",
   "theme_color": "#0b0a1f",
   "orientation": "portrait",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "utilities"],
   "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Daily Mission", "short_name": "Mission", "url": "/missions", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Learning Paths", "short_name": "Paths", "url": "/paths", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "AI Playground", "short_name": "Playground", "url": "/playground", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
   ]
 }
