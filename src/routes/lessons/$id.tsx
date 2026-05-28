@@ -1,18 +1,18 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { lessons } from "@/lib/data/mockData";
 import { Clock, Sparkles, Play, Check, ChevronLeft, Lightbulb, Target } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
 import { completeLesson } from "@/lib/services/userService";
+import { getAllLessons } from "@/lib/services/contentService";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/lessons/$id")({
   loader: ({ params }) => {
-    const lesson = lessons.find((l) => l.id === params.id);
+    const lesson = getAllLessons().find((l) => l.id === params.id);
     if (!lesson) throw notFound();
     return { lesson };
   },
   head: ({ params }) => {
-    const l = lessons.find((x) => x.id === params.id);
+    const l = getAllLessons().find((x) => x.id === params.id);
     return { meta: [{ title: `${l?.title ?? "Lesson"} — HN-AI` }, { name: "description", content: l?.description ?? "AI lesson." }] };
   },
   notFoundComponent: () => <div className="p-10 text-center text-muted-foreground">Lesson not found.</div>,

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { lessons } from "@/lib/data/mockData";
 import { Clock, ChevronRight, Check } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
+import { useContent } from "@/hooks/use-content";
 
 export const Route = createFileRoute("/lessons/")({
   head: () => ({ meta: [{ title: "Lessons — HN-AI" }, { name: "description", content: "Short AI lessons, designed for 10-minute sessions." }] }),
@@ -10,6 +10,7 @@ export const Route = createFileRoute("/lessons/")({
 
 function LessonsIndex() {
   const user = useUser();
+  const { lessons } = useContent();
   return (
     <div className="space-y-6">
       <header className="glass-strong rounded-3xl p-6 border-neon-blue/30">

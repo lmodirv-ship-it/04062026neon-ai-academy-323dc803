@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { missions } from "@/lib/data/mockData";
 import { useUser } from "@/hooks/use-user";
+import { useContent } from "@/hooks/use-content";
 import { completeMission } from "@/lib/services/userService";
 import { Check, Flame, Sparkles, ChevronRight, Lock } from "lucide-react";
 
@@ -11,6 +11,7 @@ export const Route = createFileRoute("/missions")({
 
 function Missions() {
   const user = useUser();
+  const { missions } = useContent();
   const today = (new Date().getDate() - 1) % missions.length;
 
   return (

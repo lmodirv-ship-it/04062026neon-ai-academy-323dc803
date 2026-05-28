@@ -1,15 +1,16 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { learningPaths, lessons } from "@/lib/data/mockData";
 import { BookOpen, Clock, Lock, ChevronRight, Check } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
+import { useContent } from "@/hooks/use-content";
+import { getAllLessons, getAllPaths } from "@/lib/services/contentService";
 
 export const Route = createFileRoute("/paths/$slug")({
   head: ({ params }) => {
-    const p = learningPaths.find((x) => x.slug === params.slug);
+    const p = getAllPaths().find((x) => x.slug === params.slug);
     return { meta: [{ title: `${p?.title ?? "Path"} — HN-AI` }, { name: "description", content: p?.description ?? "AI learning path." }] };
   },
   loader: ({ params }) => {
-    const path = learningPaths.find((x) => x.slug === params.slug);
+    const path = getAllPaths().find((x) => x.slug === params.slug);
     if (!path) throw notFound();
     return { path };
   },
@@ -21,7 +22,8 @@ export const Route = createFileRoute("/paths/$slug")({
 function PathDetail() {
   const { path } = Route.useLoaderData();
   const user = useUser();
-  const pathLessons = lessons.filter((l) => l.pathSlug === path.slug);
+  useContent(); // re-render when admin adds lessons
+  const pathLessons = getAllLessons().filter((l) => l.pathSlug === path.slug);
   // pad with stubs to show structure
   const totalSlots = Math.max(path.lessons, pathLessons.length);
   const stubs = Array.from({ length: Math.max(0, totalSlots - pathLessons.length) }, (_, i) => ({

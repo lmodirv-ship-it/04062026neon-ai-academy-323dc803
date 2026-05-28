@@ -2,10 +2,11 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Toaster } from "sonner";
 import {
   Home, Target, Route as RouteIcon, BookOpen, Sparkles, Rocket,
-  ListChecks, Trophy, Wrench, User as UserIcon, Crown, Flame, Bell, Search,
+  ListChecks, Trophy, Wrench, User as UserIcon, Crown, Flame, Bell, Search, Shield,
 } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
 import { getLevelInfo } from "@/lib/services/userService";
+import { PWAInstall } from "@/components/PWAInstall";
 
 const nav = [
   { to: "/", label: "Home", icon: Home },
@@ -18,6 +19,7 @@ const nav = [
   { to: "/tools", label: "AI Tools", icon: Wrench },
   { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
   { to: "/profile", label: "Profile", icon: UserIcon },
+  { to: "/admin", label: "Admin", icon: Shield },
 ] as const;
 
 const bottom = [
@@ -104,6 +106,7 @@ function TopBar({ streak, level, levelName }: { streak: number; level: number; l
         />
       </div>
       <div className="ml-auto flex items-center gap-2 sm:gap-3">
+        <PWAInstall />
         <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-neon-orange/15 border border-neon-orange/40 text-neon-orange font-bold text-sm">
           <Flame className="size-4 fill-neon-orange fire" />{streak}
         </div>
