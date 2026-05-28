@@ -1,9 +1,9 @@
 export function StatTile({
-  icon, label, value, accent = "neon-blue",
-}: { icon: React.ReactNode; label: string; value: React.ReactNode; accent?: string }) {
+  icon, label, value, color = "text-neon-blue", ring = "border-neon-blue/40", bg = "bg-neon-blue/15",
+}: { icon: React.ReactNode; label: string; value: React.ReactNode; color?: string; ring?: string; bg?: string }) {
   return (
     <div className="glass rounded-2xl p-4 flex items-center gap-3 hover:border-neon-blue/40 transition">
-      <div className={`size-10 rounded-xl grid place-items-center bg-${accent}/15 border border-${accent}/40 text-${accent}`}>
+      <div className={`size-10 rounded-xl grid place-items-center border ${bg} ${ring} ${color}`}>
         {icon}
       </div>
       <div className="leading-tight">
