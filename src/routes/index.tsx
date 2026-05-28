@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, Play, Crown, Flame, Star, Trophy, BookOpen, Rocket, ListChecks, TrendingUp, ChevronRight, Zap, Quote } from "lucide-react";
+import logoImg from "@/assets/hn-ai-logo.jpg";
 import { learningPaths, aiQuotes, trendingTools, missions } from "@/lib/data/mockData";
 import { PathCard } from "@/components/PathCard";
 import { StatTile } from "@/components/StatTile";
 import { Particles } from "@/components/Particles";
-import { AIHologram } from "@/components/AIHologram";
 import { XPBar } from "@/components/XPBar";
 import { useUser } from "@/hooks/use-user";
 import { getLevelInfo } from "@/lib/services/userService";
