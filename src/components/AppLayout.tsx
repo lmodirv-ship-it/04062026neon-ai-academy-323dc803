@@ -2,7 +2,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Toaster } from "sonner";
 import {
   Home, Target, Route as RouteIcon, BookOpen, Sparkles, Rocket,
-  ListChecks, Trophy, Wrench, User as UserIcon, Crown, Zap, Bell, Search,
+  ListChecks, Trophy, Wrench, User as UserIcon, Crown, Flame, Bell, Search,
 } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
 import { getLevelInfo } from "@/lib/services/userService";
@@ -104,14 +104,15 @@ function TopBar({ streak, level, levelName }: { streak: number; level: number; l
         />
       </div>
       <div className="ml-auto flex items-center gap-2 sm:gap-3">
-        <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-neon-orange/15 border border-neon-orange/40 text-neon-orange font-bold text-sm">
-          <Zap className="size-4 fill-neon-orange" />{streak}
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-neon-orange/15 border border-neon-orange/40 text-neon-orange font-bold text-sm">
+          <Flame className="size-4 fill-neon-orange fire" />{streak}
         </div>
-        <button className="size-9 grid place-items-center rounded-full glass hover:border-neon-blue/40 transition">
+        <button className="size-9 grid place-items-center rounded-full glass hover:border-neon-blue/40 transition relative">
           <Bell className="size-4" />
+          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-neon-pink text-neon-pink pulse-dot" />
         </button>
-        <Link to="/profile" className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full glass border-neon-purple/40 hover:border-neon-purple transition">
-          <div className="size-7 rounded-full bg-gradient-to-br from-neon-purple to-neon-blue grid place-items-center text-xs">👑</div>
+        <Link to="/profile" className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full glass border-neon-purple/40 hover:border-neon-purple hover:glow-purple transition">
+          <div className="size-7 rounded-full bg-gradient-to-br from-neon-purple to-neon-blue grid place-items-center text-xs ring-2 ring-neon-purple/40">👑</div>
           <div className="hidden sm:block leading-tight">
             <div className="text-xs font-semibold">{levelName}</div>
             <div className="text-[10px] text-muted-foreground">Level {level}</div>
