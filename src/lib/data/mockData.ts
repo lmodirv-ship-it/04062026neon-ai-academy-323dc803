@@ -87,6 +87,7 @@ export const learningPaths: LearningPath[] = [
   { id: "p8", slug: "ai-automation", title: "AI Automation", description: "Automate workflows with n8n, Zapier & AI.", icon: "Workflow", color: "neon-orange", lessons: 15, difficulty: "Intermediate", tagline: "Automate the boring stuff" },
   { id: "p9", slug: "ai-tools", title: "AI Tools Mastery", description: "Become a power user of every AI tool.", icon: "Wrench", color: "neon-blue", lessons: 26, difficulty: "Beginner", tagline: "Tool up like a pro" },
   { id: "p10", slug: "web-dev-ai", title: "Web Dev with AI", description: "Ship full-stack apps with AI pair programming.", icon: "Globe", color: "neon-purple", lessons: 28, difficulty: "Intermediate", tagline: "Ship apps faster than ever" },
+  { id: "p11", slug: "ollama-local-ai", title: "Ollama & Local AI", description: "Run powerful LLMs on your own machine — private & offline.", icon: "Cpu", color: "neon-cyan", lessons: 12, difficulty: "Intermediate", tagline: "Your AI, your hardware" },
 ];
 
 export const lessons: Lesson[] = [
