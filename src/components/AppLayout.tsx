@@ -67,6 +67,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
         <BottomNav />
+        <Toaster theme="dark" position="top-right" richColors />
       </div>
     </div>
   );
