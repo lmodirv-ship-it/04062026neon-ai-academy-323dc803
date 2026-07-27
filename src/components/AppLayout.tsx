@@ -3,7 +3,7 @@ import { Toaster } from "sonner";
 import {
   Home, Target, Route as RouteIcon, BookOpen, Sparkles, Rocket, GraduationCap,
   ListChecks, Trophy, Wrench, User as UserIcon, Crown, Flame, Bell, Search, Shield,
-  LayoutDashboard, LogIn, LogOut, Newspaper,
+  LayoutDashboard, LogIn, LogOut, Newspaper, Library, Award,
 } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
 import { useAuth } from "@/hooks/use-auth";
@@ -14,7 +14,9 @@ import { ViewTracker } from "@/components/ViewTracker";
 const nav = [
   { to: "/", label: "Home", icon: Home },
   { to: "/learn", label: "Program", icon: GraduationCap },
+  { to: "/courses", label: "Courses", icon: Library },
   { to: "/dashboard", label: "My Dashboard", icon: LayoutDashboard },
+  { to: "/certificates", label: "Certificates", icon: Award },
   { to: "/missions", label: "Daily Mission", icon: Target },
   { to: "/paths", label: "Learning Paths", icon: RouteIcon },
   { to: "/lessons", label: "Lessons", icon: BookOpen },
