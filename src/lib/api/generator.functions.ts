@@ -232,7 +232,7 @@ export const saveCourseOutline = createServerFn({ method: "POST" })
             duration_minutes: l.duration_minutes,
             xp_reward: l.xp_reward,
             order_index: li,
-            status: "draft",
+            status: "draft" as const,
           }));
 
         if (rows.length) {
@@ -357,7 +357,7 @@ Language: ${data.language === "ar" ? "Arabic" : "English"}`,
     const { error: bErr } = await db.from("lesson_blocks").insert(
       content.blocks.map((b, idx) => ({
         lesson_id: data.lessonId,
-        kind: b.kind,
+        kind: b.kind as string,
         content: b.content,
         language: b.language ?? null,
         order_index: idx,
