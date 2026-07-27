@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Flame, Star, Target, Trophy, BookOpen, ArrowRight } from "lucide-react";
+import {
+  Flame, Star, Target, Trophy, BookOpen, ArrowRight, Clock, Award, Sparkles,
+  CalendarDays, Megaphone, Bot,
+} from "lucide-react";
 import { getMyProgress } from "@/lib/api/progress.functions";
 import { getCurriculum } from "@/lib/api/curriculum.functions";
 import { useAuth } from "@/hooks/use-auth";
@@ -19,33 +22,80 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
 });
 
+const announcements = [
+  { title: "مسارات جديدة قادمة", body: "Linux، قواعد البيانات والأمن السيبراني قيد الإعداد." },
+  { title: "HN AI Chat متاح الآن", body: "اسأل المرشد الذكي عن أي درس أو مفهوم تقني." },
+];
+
 function Dashboard() {
   const { user } = useAuth();
   const { data } = useQuery({ queryKey: ["my-progress"], queryFn: () => getMyProgress() });
   const { data: curriculum } = useQuery({ queryKey: ["curriculum"], queryFn: () => getCurriculum() });
 
   const stats = data?.stats;
-  const done = new Set((data?.progress ?? []).filter((p) => p.status === "completed").map((p) => p.lesson_id));
+  const progress = data?.progress ?? [];
+  const done = new Set(progress.filter((p) => p.status === "completed").map((p) => p.lesson_id));
 
   const allLessons = (curriculum ?? []).flatMap((p) =>
     p.levels.flatMap((l) => l.courses.flatMap((c) => c.chapters.flatMap((ch) => ch.units.flatMap((u) => u.lessons)))),
   );
   const next = allLessons.find((l) => !done.has(l.id));
+  const suggested = allLessons.filter((l) => !done.has(l.id)).slice(1, 4);
+  const minutes = allLessons.filter((l) => done.has(l.id)).reduce((s, l) => s + (l.duration_minutes ?? 0), 0);
+  const overallPct = allLessons.length ? Math.round((done.size / allLessons.length) * 100) : 0;
   const accuracy = stats && stats.total_answers > 0 ? Math.round((stats.correct_answers / stats.total_answers) * 100) : 0;
 
+  const weekDays = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"];
+  const week = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date();
+    const shift = (d.getDay() + 6) % 7;
+    d.setDate(d.getDate() - shift + i);
+    const iso = d.toISOString().slice(0, 10);
+    return {
+      label: weekDays[i],
+      day: d.getDate(),
+      active: progress.some((p) => (p.completed_at ?? "").slice(0, 10) === iso),
+      today: iso === new Date().toISOString().slice(0, 10),
+    };
+  });
+
+  const badges = [
+    { icon: BookOpen, name: "الخطوة الأولى", got: (stats?.lessons_completed ?? 0) >= 1 },
+    { icon: Star, name: "100 XP", got: (stats?.xp ?? 0) >= 100 },
+    { icon: Flame, name: "7 أيام", got: (stats?.streak ?? 0) >= 7 },
+    { icon: Target, name: "دقّة 80%", got: accuracy >= 80 },
+  ];
+
   return (
-    <div className="space-y-8">
-      <header>
-        <h1 className="font-display text-3xl font-bold">مرحبًا {user?.user_metadata?.display_name ?? "بك"} 👑</h1>
-        <p className="text-muted-foreground text-sm mt-1">تابع رحلتك في تعلّم الذكاء الاصطناعي، 10 دقائق يوميًا.</p>
+    <div className="space-y-8" dir="rtl">
+      <header className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="font-display text-3xl font-bold">مرحبًا {user?.user_metadata?.display_name ?? "بك"} 👑</h1>
+          <p className="text-muted-foreground text-sm mt-1">تابع رحلتك في تعلّم الذكاء الاصطناعي، 10 دقائق يوميًا.</p>
+        </div>
+        <Link to="/chat" className="glass rounded-xl px-4 py-2 text-sm font-semibold border border-neon-purple/40 inline-flex items-center gap-2">
+          <Bot className="size-4 text-neon-purple" /> اسأل المرشد الذكي
+        </Link>
       </header>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <Tile icon={Star} label="XP" value={stats?.xp ?? 0} color="neon-purple" />
         <Tile icon={Flame} label="السلسلة" value={`${stats?.streak ?? 0} يوم`} color="neon-orange" />
         <Tile icon={BookOpen} label="دروس مكتملة" value={stats?.lessons_completed ?? 0} color="neon-blue" />
         <Tile icon={Target} label="الدقة" value={`${accuracy}%`} color="neon-cyan" />
+        <Tile icon={Clock} label="ساعات التعلّم" value={`${(minutes / 60).toFixed(1)}س`} color="neon-pink" />
       </div>
+
+      <section className="glass rounded-3xl p-6 border border-border/40">
+        <div className="flex justify-between text-sm mb-2">
+          <span className="font-semibold">نسبة الإنجاز الكلية</span>
+          <span className="text-muted-foreground">{done.size}/{allLessons.length} درس — {overallPct}%</span>
+        </div>
+        <div className="h-3 rounded-full bg-muted/30 overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-neon-purple via-neon-blue to-neon-cyan" style={{ width: `${overallPct}%` }} />
+        </div>
+      </section>
+
 
       <section className="glass-strong rounded-3xl p-6 border border-border/40">
         <div className="flex items-center gap-2 mb-3">
