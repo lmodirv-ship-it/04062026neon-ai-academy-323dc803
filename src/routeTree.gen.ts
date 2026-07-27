@@ -57,6 +57,7 @@ import { Route as AuthenticatedConsoleCouponsRouteImport } from './routes/_authe
 import { Route as AuthenticatedConsoleCertificatesRouteImport } from './routes/_authenticated/console/certificates'
 import { Route as AuthenticatedConsoleBlogRouteImport } from './routes/_authenticated/console/blog'
 import { Route as AuthenticatedConsoleApiRouteImport } from './routes/_authenticated/console/api'
+import { Route as AuthenticatedConsoleAccountRouteImport } from './routes/_authenticated/console/account'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
@@ -321,6 +322,12 @@ const AuthenticatedConsoleApiRoute = AuthenticatedConsoleApiRouteImport.update({
   path: '/api',
   getParentRoute: () => AuthenticatedConsoleRoute,
 } as any)
+const AuthenticatedConsoleAccountRoute =
+  AuthenticatedConsoleAccountRouteImport.update({
+    id: '/account',
+    path: '/account',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -345,6 +352,7 @@ export interface FileRoutesByFullPath {
   '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
+  '/console/account': typeof AuthenticatedConsoleAccountRoute
   '/console/api': typeof AuthenticatedConsoleApiRoute
   '/console/blog': typeof AuthenticatedConsoleBlogRoute
   '/console/certificates': typeof AuthenticatedConsoleCertificatesRoute
@@ -393,6 +401,7 @@ export interface FileRoutesByTo {
   '/learn': typeof LearnIndexRoute
   '/lessons': typeof LessonsIndexRoute
   '/paths': typeof PathsIndexRoute
+  '/console/account': typeof AuthenticatedConsoleAccountRoute
   '/console/api': typeof AuthenticatedConsoleApiRoute
   '/console/blog': typeof AuthenticatedConsoleBlogRoute
   '/console/certificates': typeof AuthenticatedConsoleCertificatesRoute
@@ -444,6 +453,7 @@ export interface FileRoutesById {
   '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
+  '/_authenticated/console/account': typeof AuthenticatedConsoleAccountRoute
   '/_authenticated/console/api': typeof AuthenticatedConsoleApiRoute
   '/_authenticated/console/blog': typeof AuthenticatedConsoleBlogRoute
   '/_authenticated/console/certificates': typeof AuthenticatedConsoleCertificatesRoute
@@ -495,6 +505,7 @@ export interface FileRouteTypes {
     | '/learn/'
     | '/lessons/'
     | '/paths/'
+    | '/console/account'
     | '/console/api'
     | '/console/blog'
     | '/console/certificates'
@@ -543,6 +554,7 @@ export interface FileRouteTypes {
     | '/learn'
     | '/lessons'
     | '/paths'
+    | '/console/account'
     | '/console/api'
     | '/console/blog'
     | '/console/certificates'
@@ -593,6 +605,7 @@ export interface FileRouteTypes {
     | '/learn/'
     | '/lessons/'
     | '/paths/'
+    | '/_authenticated/console/account'
     | '/_authenticated/console/api'
     | '/_authenticated/console/blog'
     | '/_authenticated/console/certificates'
@@ -981,10 +994,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConsoleApiRouteImport
       parentRoute: typeof AuthenticatedConsoleRoute
     }
+    '/_authenticated/console/account': {
+      id: '/_authenticated/console/account'
+      path: '/account'
+      fullPath: '/console/account'
+      preLoaderRoute: typeof AuthenticatedConsoleAccountRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
   }
 }
 
 interface AuthenticatedConsoleRouteChildren {
+  AuthenticatedConsoleAccountRoute: typeof AuthenticatedConsoleAccountRoute
   AuthenticatedConsoleApiRoute: typeof AuthenticatedConsoleApiRoute
   AuthenticatedConsoleBlogRoute: typeof AuthenticatedConsoleBlogRoute
   AuthenticatedConsoleCertificatesRoute: typeof AuthenticatedConsoleCertificatesRoute
@@ -1013,6 +1034,7 @@ interface AuthenticatedConsoleRouteChildren {
 }
 
 const AuthenticatedConsoleRouteChildren: AuthenticatedConsoleRouteChildren = {
+  AuthenticatedConsoleAccountRoute: AuthenticatedConsoleAccountRoute,
   AuthenticatedConsoleApiRoute: AuthenticatedConsoleApiRoute,
   AuthenticatedConsoleBlogRoute: AuthenticatedConsoleBlogRoute,
   AuthenticatedConsoleCertificatesRoute: AuthenticatedConsoleCertificatesRoute,
