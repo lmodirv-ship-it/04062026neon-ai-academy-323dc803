@@ -58,6 +58,7 @@ import { Route as AuthenticatedConsoleLogsRouteImport } from './routes/_authenti
 import { Route as AuthenticatedConsoleLessonsRouteImport } from './routes/_authenticated/console/lessons'
 import { Route as AuthenticatedConsoleLearningRouteImport } from './routes/_authenticated/console/learning'
 import { Route as AuthenticatedConsoleInstructorsRouteImport } from './routes/_authenticated/console/instructors'
+import { Route as AuthenticatedConsoleGeneratorRouteImport } from './routes/_authenticated/console/generator'
 import { Route as AuthenticatedConsoleForumRouteImport } from './routes/_authenticated/console/forum'
 import { Route as AuthenticatedConsoleFinancialRouteImport } from './routes/_authenticated/console/financial'
 import { Route as AuthenticatedConsoleCoursesRouteImport } from './routes/_authenticated/console/courses'
@@ -331,6 +332,12 @@ const AuthenticatedConsoleInstructorsRoute =
     path: '/instructors',
     getParentRoute: () => AuthenticatedConsoleRoute,
   } as any)
+const AuthenticatedConsoleGeneratorRoute =
+  AuthenticatedConsoleGeneratorRouteImport.update({
+    id: '/generator',
+    path: '/generator',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
 const AuthenticatedConsoleForumRoute =
   AuthenticatedConsoleForumRouteImport.update({
     id: '/forum',
@@ -418,6 +425,7 @@ export interface FileRoutesByFullPath {
   '/console/courses': typeof AuthenticatedConsoleCoursesRoute
   '/console/financial': typeof AuthenticatedConsoleFinancialRoute
   '/console/forum': typeof AuthenticatedConsoleForumRoute
+  '/console/generator': typeof AuthenticatedConsoleGeneratorRoute
   '/console/instructors': typeof AuthenticatedConsoleInstructorsRoute
   '/console/learning': typeof AuthenticatedConsoleLearningRoute
   '/console/lessons': typeof AuthenticatedConsoleLessonsRoute
@@ -475,6 +483,7 @@ export interface FileRoutesByTo {
   '/console/courses': typeof AuthenticatedConsoleCoursesRoute
   '/console/financial': typeof AuthenticatedConsoleFinancialRoute
   '/console/forum': typeof AuthenticatedConsoleForumRoute
+  '/console/generator': typeof AuthenticatedConsoleGeneratorRoute
   '/console/instructors': typeof AuthenticatedConsoleInstructorsRoute
   '/console/learning': typeof AuthenticatedConsoleLearningRoute
   '/console/lessons': typeof AuthenticatedConsoleLessonsRoute
@@ -535,6 +544,7 @@ export interface FileRoutesById {
   '/_authenticated/console/courses': typeof AuthenticatedConsoleCoursesRoute
   '/_authenticated/console/financial': typeof AuthenticatedConsoleFinancialRoute
   '/_authenticated/console/forum': typeof AuthenticatedConsoleForumRoute
+  '/_authenticated/console/generator': typeof AuthenticatedConsoleGeneratorRoute
   '/_authenticated/console/instructors': typeof AuthenticatedConsoleInstructorsRoute
   '/_authenticated/console/learning': typeof AuthenticatedConsoleLearningRoute
   '/_authenticated/console/lessons': typeof AuthenticatedConsoleLessonsRoute
@@ -595,6 +605,7 @@ export interface FileRouteTypes {
     | '/console/courses'
     | '/console/financial'
     | '/console/forum'
+    | '/console/generator'
     | '/console/instructors'
     | '/console/learning'
     | '/console/lessons'
@@ -652,6 +663,7 @@ export interface FileRouteTypes {
     | '/console/courses'
     | '/console/financial'
     | '/console/forum'
+    | '/console/generator'
     | '/console/instructors'
     | '/console/learning'
     | '/console/lessons'
@@ -711,6 +723,7 @@ export interface FileRouteTypes {
     | '/_authenticated/console/courses'
     | '/_authenticated/console/financial'
     | '/_authenticated/console/forum'
+    | '/_authenticated/console/generator'
     | '/_authenticated/console/instructors'
     | '/_authenticated/console/learning'
     | '/_authenticated/console/lessons'
@@ -1104,6 +1117,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConsoleInstructorsRouteImport
       parentRoute: typeof AuthenticatedConsoleRoute
     }
+    '/_authenticated/console/generator': {
+      id: '/_authenticated/console/generator'
+      path: '/generator'
+      fullPath: '/console/generator'
+      preLoaderRoute: typeof AuthenticatedConsoleGeneratorRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
     '/_authenticated/console/forum': {
       id: '/_authenticated/console/forum'
       path: '/forum'
@@ -1172,6 +1192,7 @@ interface AuthenticatedConsoleRouteChildren {
   AuthenticatedConsoleCoursesRoute: typeof AuthenticatedConsoleCoursesRoute
   AuthenticatedConsoleFinancialRoute: typeof AuthenticatedConsoleFinancialRoute
   AuthenticatedConsoleForumRoute: typeof AuthenticatedConsoleForumRoute
+  AuthenticatedConsoleGeneratorRoute: typeof AuthenticatedConsoleGeneratorRoute
   AuthenticatedConsoleInstructorsRoute: typeof AuthenticatedConsoleInstructorsRoute
   AuthenticatedConsoleLearningRoute: typeof AuthenticatedConsoleLearningRoute
   AuthenticatedConsoleLessonsRoute: typeof AuthenticatedConsoleLessonsRoute
@@ -1201,6 +1222,7 @@ const AuthenticatedConsoleRouteChildren: AuthenticatedConsoleRouteChildren = {
   AuthenticatedConsoleCoursesRoute: AuthenticatedConsoleCoursesRoute,
   AuthenticatedConsoleFinancialRoute: AuthenticatedConsoleFinancialRoute,
   AuthenticatedConsoleForumRoute: AuthenticatedConsoleForumRoute,
+  AuthenticatedConsoleGeneratorRoute: AuthenticatedConsoleGeneratorRoute,
   AuthenticatedConsoleInstructorsRoute: AuthenticatedConsoleInstructorsRoute,
   AuthenticatedConsoleLearningRoute: AuthenticatedConsoleLearningRoute,
   AuthenticatedConsoleLessonsRoute: AuthenticatedConsoleLessonsRoute,
