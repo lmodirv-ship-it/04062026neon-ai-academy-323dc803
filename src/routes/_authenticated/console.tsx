@@ -251,7 +251,7 @@ function ConsoleLayout() {
                     <div className="text-xs font-semibold truncate max-w-[140px]">
                       مرحبًا، {user?.user_metadata?.full_name ?? user?.email?.split("@")[0] ?? "المدير"}
                     </div>
-                    <div className="text-[10px] text-muted-foreground">مدير المنصة</div>
+                    <div className="text-[10px] text-muted-foreground">{ROLE_LABEL[role ?? "student"] ?? "—"}</div>
                   </div>
                   <div className="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-neon-purple to-neon-blue text-white text-xs font-bold">
                     {(user?.email ?? "A").slice(0, 1).toUpperCase()}
