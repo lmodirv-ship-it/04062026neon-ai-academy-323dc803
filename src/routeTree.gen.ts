@@ -37,6 +37,7 @@ import { Route as AuthenticatedStudioRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedConsoleRouteImport } from './routes/_authenticated/console'
 import { Route as AuthenticatedCertificatesRouteImport } from './routes/_authenticated/certificates'
+import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as AuthenticatedConsoleIndexRouteImport } from './routes/_authenticated/console/index'
 import { Route as AuthenticatedConsoleTransactionsRouteImport } from './routes/_authenticated/console/transactions'
 import { Route as AuthenticatedConsoleTrafficRouteImport } from './routes/_authenticated/console/traffic'
@@ -202,6 +203,12 @@ const AuthenticatedCertificatesRoute =
   AuthenticatedCertificatesRouteImport.update({
     id: '/certificates',
     path: '/certificates',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAchievementsRoute =
+  AuthenticatedAchievementsRouteImport.update({
+    id: '/achievements',
+    path: '/achievements',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedConsoleIndexRoute =
@@ -373,6 +380,7 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/achievements': typeof AuthenticatedAchievementsRoute
   '/certificates': typeof AuthenticatedCertificatesRoute
   '/console': typeof AuthenticatedConsoleRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -428,6 +436,7 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/achievements': typeof AuthenticatedAchievementsRoute
   '/certificates': typeof AuthenticatedCertificatesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/studio': typeof AuthenticatedStudioRoute
@@ -484,6 +493,7 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/_authenticated/achievements': typeof AuthenticatedAchievementsRoute
   '/_authenticated/certificates': typeof AuthenticatedCertificatesRoute
   '/_authenticated/console': typeof AuthenticatedConsoleRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -541,6 +551,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/achievements'
     | '/certificates'
     | '/console'
     | '/dashboard'
@@ -596,6 +607,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/achievements'
     | '/certificates'
     | '/dashboard'
     | '/studio'
@@ -651,6 +663,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/_authenticated/achievements'
     | '/_authenticated/certificates'
     | '/_authenticated/console'
     | '/_authenticated/dashboard'
@@ -919,6 +932,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCertificatesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/achievements': {
+      id: '/_authenticated/achievements'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/console/': {
       id: '/_authenticated/console/'
       path: '/'
@@ -1167,6 +1187,7 @@ const AuthenticatedConsoleRouteWithChildren =
   AuthenticatedConsoleRoute._addFileChildren(AuthenticatedConsoleRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAchievementsRoute: typeof AuthenticatedAchievementsRoute
   AuthenticatedCertificatesRoute: typeof AuthenticatedCertificatesRoute
   AuthenticatedConsoleRoute: typeof AuthenticatedConsoleRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
@@ -1174,6 +1195,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAchievementsRoute: AuthenticatedAchievementsRoute,
   AuthenticatedCertificatesRoute: AuthenticatedCertificatesRoute,
   AuthenticatedConsoleRoute: AuthenticatedConsoleRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
