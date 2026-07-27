@@ -4,15 +4,17 @@ import type { ReactNode } from "react";
 
 export function Stat({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
   return (
-    <div className="glass rounded-2xl p-4">
-      <div className="text-2xl font-display font-extrabold text-gold">
+    <div className="relative overflow-hidden rounded-3xl border border-white/5 bg-[color-mix(in_oklab,var(--background)_75%,black)] p-5 transition hover:border-neon-purple/30">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-neon-purple/60 to-transparent" />
+      <div className="text-3xl font-display font-extrabold text-gold">
         {typeof value === "number" ? value.toLocaleString() : value}
       </div>
-      <div className="text-xs text-muted-foreground mt-1">{label}</div>
+      <div className="text-xs text-muted-foreground mt-1.5">{label}</div>
       {hint && <div className="text-[11px] text-muted-foreground/70 mt-0.5">{hint}</div>}
     </div>
   );
 }
+
 
 export function exportCsv(name: string, rows: Record<string, unknown>[]) {
   if (!rows.length) return toast.error("لا توجد بيانات للتصدير");
