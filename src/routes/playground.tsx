@@ -89,16 +89,18 @@ function Playground() {
         <div className="flex items-center justify-between mt-3 gap-2 flex-wrap">
           <div className="text-xs text-muted-foreground">{prompt.length} chars</div>
           <div className="flex items-center gap-2">
-            <button onClick={improve} disabled={!prompt.trim()} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass border-neon-cyan/40 text-neon-cyan font-semibold text-sm hover:bg-neon-cyan/10 transition disabled:opacity-50">
-              <Wand2 className="size-4" /> Improve Prompt
+            <button onClick={improve} disabled={!prompt.trim() || improving} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass border-neon-cyan/40 text-neon-cyan font-semibold text-sm hover:bg-neon-cyan/10 transition disabled:opacity-50">
+              {improving ? <Loader2 className="size-4 animate-spin" /> : <Wand2 className="size-4" />} Improve Prompt
             </button>
-            <button onClick={run} disabled={loading} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-neon-purple to-neon-blue text-white font-semibold glow-purple hover:scale-105 transition disabled:opacity-60">
+            <button onClick={run} disabled={loading || !prompt.trim()} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-neon-purple to-neon-blue text-white font-semibold glow-purple hover:scale-105 transition disabled:opacity-60">
               {loading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
               {loading ? "Thinking…" : "Generate"}
             </button>
           </div>
         </div>
+        {error && <div className="mt-3 text-sm text-destructive">{error}</div>}
       </div>
+
 
       {(output || loading) && (
         <div className="glass rounded-2xl p-5 border-neon-cyan/40 glow-cyan">
