@@ -63,7 +63,7 @@ function Playground() {
           <Sparkles className="size-3.5" /> Realtime AI Sandbox
         </div>
         <h1 className="font-display font-extrabold text-4xl sm:text-5xl tracking-tight">AI Playground</h1>
-        <p className="text-muted-foreground mt-2 max-w-xl">Write a prompt, hit generate, and get a real answer from the HN-AI engine (Gemini 2.5 Flash).</p>
+        <p className="text-muted-foreground mt-2 max-w-xl">Write a prompt, hit generate, and get a real answer from the HN-AI engine (Gemini 3.6 Flash).</p>
       </header>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
