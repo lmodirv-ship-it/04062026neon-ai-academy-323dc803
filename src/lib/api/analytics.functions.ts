@@ -17,9 +17,10 @@ export const trackView = createServerFn({ method: "POST" })
     await db.rpc("track_page_view", {
       _path: data.path,
       _session: data.session,
-      _referrer: data.referrer ?? null,
-      _country: null,
+      _referrer: data.referrer ?? undefined,
+      _country: undefined,
     });
+
     return { ok: true };
   });
 
