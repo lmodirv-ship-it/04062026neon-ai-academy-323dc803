@@ -47,12 +47,20 @@ export const listUsers = createServerFn({ method: "GET" })
       context.supabase.from("user_roles").select("user_id, role"),
     ]);
 
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: authList } = await supabaseAdmin.auth.admin.listUsers({ page: 1, perPage: 1000 });
+    const authUsers = authList?.users ?? [];
+
     return (profiles.data ?? []).map((p) => {
       const s = (stats.data ?? []).find((x) => x.user_id === p.id);
       const rs = (roles.data ?? []).filter((r) => r.user_id === p.id).map((r) => r.role as string);
+      const au = authUsers.find((u) => u.id === p.id);
       return {
         id: p.id,
         display_name: p.display_name ?? "—",
+        email: au?.email ?? "—",
+        banned: Boolean((au as { banned_until?: string } | undefined)?.banned_until && new Date((au as any).banned_until) > new Date()),
+        last_sign_in_at: au?.last_sign_in_at ?? null,
         avatar_url: p.avatar_url,
         created_at: p.created_at,
         xp: s?.xp ?? 0,
@@ -63,6 +71,7 @@ export const listUsers = createServerFn({ method: "GET" })
       };
     });
   });
+
 
 /** Change a user's role — admins only. */
 export const setUserRole = createServerFn({ method: "POST" })
