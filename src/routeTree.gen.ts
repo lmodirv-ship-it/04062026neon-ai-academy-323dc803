@@ -34,6 +34,7 @@ import { Route as LearnSlugRouteImport } from './routes/learn/$slug'
 import { Route as CoursesSlugRouteImport } from './routes/courses/$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as AuthenticatedStudioRouteImport } from './routes/_authenticated/studio'
+import { Route as AuthenticatedStatsRouteImport } from './routes/_authenticated/stats'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedConsoleRouteImport } from './routes/_authenticated/console'
 import { Route as AuthenticatedCertificatesRouteImport } from './routes/_authenticated/certificates'
@@ -187,6 +188,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 const AuthenticatedStudioRoute = AuthenticatedStudioRouteImport.update({
   id: '/studio',
   path: '/studio',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStatsRoute = AuthenticatedStatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
@@ -384,6 +390,7 @@ export interface FileRoutesByFullPath {
   '/certificates': typeof AuthenticatedCertificatesRoute
   '/console': typeof AuthenticatedConsoleRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/stats': typeof AuthenticatedStatsRoute
   '/studio': typeof AuthenticatedStudioRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
@@ -439,6 +446,7 @@ export interface FileRoutesByTo {
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/certificates': typeof AuthenticatedCertificatesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/stats': typeof AuthenticatedStatsRoute
   '/studio': typeof AuthenticatedStudioRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
@@ -497,6 +505,7 @@ export interface FileRoutesById {
   '/_authenticated/certificates': typeof AuthenticatedCertificatesRoute
   '/_authenticated/console': typeof AuthenticatedConsoleRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/stats': typeof AuthenticatedStatsRoute
   '/_authenticated/studio': typeof AuthenticatedStudioRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
@@ -555,6 +564,7 @@ export interface FileRouteTypes {
     | '/certificates'
     | '/console'
     | '/dashboard'
+    | '/stats'
     | '/studio'
     | '/blog/$slug'
     | '/courses/$slug'
@@ -610,6 +620,7 @@ export interface FileRouteTypes {
     | '/achievements'
     | '/certificates'
     | '/dashboard'
+    | '/stats'
     | '/studio'
     | '/blog/$slug'
     | '/courses/$slug'
@@ -667,6 +678,7 @@ export interface FileRouteTypes {
     | '/_authenticated/certificates'
     | '/_authenticated/console'
     | '/_authenticated/dashboard'
+    | '/_authenticated/stats'
     | '/_authenticated/studio'
     | '/blog/$slug'
     | '/courses/$slug'
@@ -909,6 +921,13 @@ declare module '@tanstack/react-router' {
       path: '/studio'
       fullPath: '/studio'
       preLoaderRoute: typeof AuthenticatedStudioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/stats': {
+      id: '/_authenticated/stats'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof AuthenticatedStatsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
@@ -1191,6 +1210,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCertificatesRoute: typeof AuthenticatedCertificatesRoute
   AuthenticatedConsoleRoute: typeof AuthenticatedConsoleRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedStatsRoute: typeof AuthenticatedStatsRoute
   AuthenticatedStudioRoute: typeof AuthenticatedStudioRoute
 }
 
@@ -1199,6 +1219,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCertificatesRoute: AuthenticatedCertificatesRoute,
   AuthenticatedConsoleRoute: AuthenticatedConsoleRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedStatsRoute: AuthenticatedStatsRoute,
   AuthenticatedStudioRoute: AuthenticatedStudioRoute,
 }
 
