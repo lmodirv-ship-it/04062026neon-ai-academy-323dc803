@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { Sparkles, Wand2, Image as ImageIcon, Code2, Loader2 } from "lucide-react";
+import { runAI } from "@/lib/api/ai.functions";
 
 export const Route = createFileRoute("/playground")({
   head: () => ({ meta: [{ title: "AI Playground — HN-AI" }, { name: "description", content: "Experiment with prompts, generate ideas, and try mini AI tools." }] }),
@@ -14,33 +16,43 @@ const presets = [
   { icon: Sparkles, label: "Hook Writer", prompt: "Write a 60-second YouTube hook about " },
 ];
 
-const fakeOutputs = [
-  "✨ Here's a draft for you:\n\n1. The neon era of AI is just beginning.\n2. Most people are still using AI like a calculator — you can use it like an architect.\n3. Pick ONE workflow this week and let an AI agent handle 80%.\n\n— HN-AI Engine",
-  "🎯 Try this CRISP-style rewrite:\n\n[Context] You're building a side project.\n[Role] Senior product strategist.\n[Instruction] Suggest the MVP feature list.\n[Specifics] 5 features, ranked.\n[Polish] Punchy and confident.",
-  "🧠 Concept sketch:\nA neon throne room where the user 'levels up' as they learn. Cinematic, dark navy, electric blue rim light, 35mm cinematic, ultra-detailed.",
-];
-
 function Playground() {
   const [prompt, setPrompt] = useState("");
   const [output, setOutput] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [improving, setImproving] = useState(false);
+  const callAI = useServerFn(runAI);
 
-  const run = () => {
-    if (!prompt.trim()) return;
+  const run = async () => {
+    if (!prompt.trim() || loading) return;
     setLoading(true);
     setOutput("");
-    setTimeout(() => {
-      setOutput(fakeOutputs[Math.floor(Math.random() * fakeOutputs.length)]);
+    setError("");
+    try {
+      const res = await callAI({ data: { prompt: prompt.trim(), mode: "generate" } });
+      setOutput(res.text);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "حدث خطأ غير متوقع.");
+    } finally {
       setLoading(false);
-    }, 900);
+    }
   };
 
-  const improve = () => {
-    if (!prompt.trim()) return;
-    const base = prompt.trim().replace(/\.$/, "");
-    const improved = `[Context] You are helping a learner on HN-AI.\n[Role] Act as a senior AI mentor.\n[Instruction] ${base}\n[Specifics] Use 3 numbered bullets. Each under 20 words.\n[Polish] Friendly, confident, and concrete with one real example.`;
-    setPrompt(improved);
+  const improve = async () => {
+    if (!prompt.trim() || improving) return;
+    setImproving(true);
+    setError("");
+    try {
+      const res = await callAI({ data: { prompt: prompt.trim(), mode: "improve" } });
+      setPrompt(res.text);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "حدث خطأ غير متوقع.");
+    } finally {
+      setImproving(false);
+    }
   };
+
 
 
   return (
@@ -51,7 +63,7 @@ function Playground() {
           <Sparkles className="size-3.5" /> Realtime AI Sandbox
         </div>
         <h1 className="font-display font-extrabold text-4xl sm:text-5xl tracking-tight">AI Playground</h1>
-        <p className="text-muted-foreground mt-2 max-w-xl">Write a prompt, hit generate, and watch ideas appear. Wire this up to HN-DB later for real model calls.</p>
+        <p className="text-muted-foreground mt-2 max-w-xl">Write a prompt, hit generate, and get a real answer from the HN-AI engine (Gemini 3.6 Flash).</p>
       </header>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -77,16 +89,18 @@ function Playground() {
         <div className="flex items-center justify-between mt-3 gap-2 flex-wrap">
           <div className="text-xs text-muted-foreground">{prompt.length} chars</div>
           <div className="flex items-center gap-2">
-            <button onClick={improve} disabled={!prompt.trim()} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass border-neon-cyan/40 text-neon-cyan font-semibold text-sm hover:bg-neon-cyan/10 transition disabled:opacity-50">
-              <Wand2 className="size-4" /> Improve Prompt
+            <button onClick={improve} disabled={!prompt.trim() || improving} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass border-neon-cyan/40 text-neon-cyan font-semibold text-sm hover:bg-neon-cyan/10 transition disabled:opacity-50">
+              {improving ? <Loader2 className="size-4 animate-spin" /> : <Wand2 className="size-4" />} Improve Prompt
             </button>
-            <button onClick={run} disabled={loading} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-neon-purple to-neon-blue text-white font-semibold glow-purple hover:scale-105 transition disabled:opacity-60">
+            <button onClick={run} disabled={loading || !prompt.trim()} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-neon-purple to-neon-blue text-white font-semibold glow-purple hover:scale-105 transition disabled:opacity-60">
               {loading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
               {loading ? "Thinking…" : "Generate"}
             </button>
           </div>
         </div>
+        {error && <div className="mt-3 text-sm text-destructive">{error}</div>}
       </div>
+
 
       {(output || loading) && (
         <div className="glass rounded-2xl p-5 border-neon-cyan/40 glow-cyan">
