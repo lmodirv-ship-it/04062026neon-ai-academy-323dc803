@@ -86,5 +86,11 @@ export const setUserRole = createServerFn({ method: "POST" })
     await context.supabase.from("user_roles").delete().eq("user_id", data.userId);
     const { error } = await context.supabase.from("user_roles").insert({ user_id: data.userId, role: data.role });
     if (error) throw new Error(error.message);
+    await context.supabase.rpc("log_action", {
+      _action: "set_role",
+      _entity: "user",
+      _entity_id: data.userId,
+      _details: { role: data.role },
+    });
     return { ok: true };
   });
