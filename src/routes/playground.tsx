@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { Sparkles, Wand2, Image as ImageIcon, Code2, Loader2 } from "lucide-react";
+import { runAI } from "@/lib/api/ai.functions";
 
 export const Route = createFileRoute("/playground")({
   head: () => ({ meta: [{ title: "AI Playground — HN-AI" }, { name: "description", content: "Experiment with prompts, generate ideas, and try mini AI tools." }] }),
@@ -14,33 +16,43 @@ const presets = [
   { icon: Sparkles, label: "Hook Writer", prompt: "Write a 60-second YouTube hook about " },
 ];
 
-const fakeOutputs = [
-  "✨ Here's a draft for you:\n\n1. The neon era of AI is just beginning.\n2. Most people are still using AI like a calculator — you can use it like an architect.\n3. Pick ONE workflow this week and let an AI agent handle 80%.\n\n— HN-AI Engine",
-  "🎯 Try this CRISP-style rewrite:\n\n[Context] You're building a side project.\n[Role] Senior product strategist.\n[Instruction] Suggest the MVP feature list.\n[Specifics] 5 features, ranked.\n[Polish] Punchy and confident.",
-  "🧠 Concept sketch:\nA neon throne room where the user 'levels up' as they learn. Cinematic, dark navy, electric blue rim light, 35mm cinematic, ultra-detailed.",
-];
-
 function Playground() {
   const [prompt, setPrompt] = useState("");
   const [output, setOutput] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [improving, setImproving] = useState(false);
+  const callAI = useServerFn(runAI);
 
-  const run = () => {
-    if (!prompt.trim()) return;
+  const run = async () => {
+    if (!prompt.trim() || loading) return;
     setLoading(true);
     setOutput("");
-    setTimeout(() => {
-      setOutput(fakeOutputs[Math.floor(Math.random() * fakeOutputs.length)]);
+    setError("");
+    try {
+      const res = await callAI({ data: { prompt: prompt.trim(), mode: "generate" } });
+      setOutput(res.text);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "حدث خطأ غير متوقع.");
+    } finally {
       setLoading(false);
-    }, 900);
+    }
   };
 
-  const improve = () => {
-    if (!prompt.trim()) return;
-    const base = prompt.trim().replace(/\.$/, "");
-    const improved = `[Context] You are helping a learner on HN-AI.\n[Role] Act as a senior AI mentor.\n[Instruction] ${base}\n[Specifics] Use 3 numbered bullets. Each under 20 words.\n[Polish] Friendly, confident, and concrete with one real example.`;
-    setPrompt(improved);
+  const improve = async () => {
+    if (!prompt.trim() || improving) return;
+    setImproving(true);
+    setError("");
+    try {
+      const res = await callAI({ data: { prompt: prompt.trim(), mode: "improve" } });
+      setPrompt(res.text);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "حدث خطأ غير متوقع.");
+    } finally {
+      setImproving(false);
+    }
   };
+
 
 
   return (
