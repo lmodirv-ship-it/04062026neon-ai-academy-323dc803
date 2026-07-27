@@ -4,7 +4,7 @@ import {
   Activity, BarChart3, Bell, BookOpen, ChevronDown, CreditCard, Crown, FileCode2, FileText,
   FlaskConical, Globe, GraduationCap, Home, KeyRound, LayoutGrid, LifeBuoy, LineChart, Lock,
   LogOut, Menu, MessageSquare, Newspaper, Radio, Receipt, Search, Settings as SettingsIcon,
-  Shield, Tags, Trophy, User, UserCog, Users, X,
+  Shield, Tags, Trophy, User, UserCog, Users, Wand2, X,
 } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import logo from "@/assets/hn-ai-logo.jpg";
@@ -36,6 +36,7 @@ const NAV = [
     items: [
       { to: "/console/courses", label: "المسارات والدورات", icon: BookOpen },
       { to: "/console/lessons", label: "الدروس والوحدات", icon: FileText },
+      { to: "/console/generator", label: "مولّد الدروس", icon: Wand2 },
       { to: "/console/quizzes", label: "الاختبارات والواجبات", icon: Trophy },
       { to: "/console/certificates", label: "الشهادات", icon: GraduationCap },
     ],
