@@ -3,12 +3,13 @@ import { Toaster } from "sonner";
 import {
   Home, Target, Route as RouteIcon, BookOpen, Sparkles, Rocket, GraduationCap,
   ListChecks, Trophy, Wrench, User as UserIcon, Crown, Flame, Bell, Search, Shield,
-  LayoutDashboard, LogIn, LogOut,
+  LayoutDashboard, LogIn, LogOut, Newspaper,
 } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
 import { useAuth } from "@/hooks/use-auth";
 import { getLevelInfo } from "@/lib/services/userService";
 import { PWAInstall } from "@/components/PWAInstall";
+import { ViewTracker } from "@/components/ViewTracker";
 
 const nav = [
   { to: "/", label: "Home", icon: Home },
@@ -21,12 +22,17 @@ const nav = [
   { to: "/projects", label: "Mini Projects", icon: Rocket },
   { to: "/quiz", label: "Quiz & Challenges", icon: ListChecks },
   { to: "/tools", label: "AI Tools", icon: Wrench },
+  { to: "/blog", label: "Blog", icon: Newspaper },
   { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
   { to: "/profile", label: "Profile", icon: UserIcon },
 ] as const;
 
 const editorNav = [
   { to: "/studio", label: "Content Studio", icon: Shield },
+] as const;
+
+const adminNav = [
+  { to: "/console", label: "لوحة المدير", icon: LayoutDashboard },
 ] as const;
 
 const bottom = [
@@ -40,11 +46,12 @@ const bottom = [
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const user = useUser();
-  const { isEditor } = useAuth();
+  const { isEditor, role } = useAuth();
   const lvl = getLevelInfo(user.xp);
 
   return (
     <div className="min-h-screen flex w-full">
+      <ViewTracker />
       {/* Sidebar (desktop) */}
       <aside className="hidden lg:flex w-64 shrink-0 flex-col border-r border-border/40 glass-strong sticky top-0 h-screen p-4 gap-1 z-30">
         <Link to="/" className="flex items-center gap-3 px-2 py-3 mb-2">
