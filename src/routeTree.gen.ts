@@ -40,6 +40,7 @@ import { Route as AuthenticatedConsoleStudentsRouteImport } from './routes/_auth
 import { Route as AuthenticatedConsoleSettingsRouteImport } from './routes/_authenticated/console/settings'
 import { Route as AuthenticatedConsoleSecurityRouteImport } from './routes/_authenticated/console/security'
 import { Route as AuthenticatedConsoleReposRouteImport } from './routes/_authenticated/console/repos'
+import { Route as AuthenticatedConsoleRealtimeRouteImport } from './routes/_authenticated/console/realtime'
 import { Route as AuthenticatedConsoleQuizzesRouteImport } from './routes/_authenticated/console/quizzes'
 import { Route as AuthenticatedConsoleProfileRouteImport } from './routes/_authenticated/console/profile'
 import { Route as AuthenticatedConsolePlaygroundRouteImport } from './routes/_authenticated/console/playground'
@@ -219,6 +220,12 @@ const AuthenticatedConsoleReposRoute =
     path: '/repos',
     getParentRoute: () => AuthenticatedConsoleRoute,
   } as any)
+const AuthenticatedConsoleRealtimeRoute =
+  AuthenticatedConsoleRealtimeRouteImport.update({
+    id: '/realtime',
+    path: '/realtime',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
 const AuthenticatedConsoleQuizzesRoute =
   AuthenticatedConsoleQuizzesRouteImport.update({
     id: '/quizzes',
@@ -354,6 +361,7 @@ export interface FileRoutesByFullPath {
   '/console/playground': typeof AuthenticatedConsolePlaygroundRoute
   '/console/profile': typeof AuthenticatedConsoleProfileRoute
   '/console/quizzes': typeof AuthenticatedConsoleQuizzesRoute
+  '/console/realtime': typeof AuthenticatedConsoleRealtimeRoute
   '/console/repos': typeof AuthenticatedConsoleReposRoute
   '/console/security': typeof AuthenticatedConsoleSecurityRoute
   '/console/settings': typeof AuthenticatedConsoleSettingsRoute
@@ -401,6 +409,7 @@ export interface FileRoutesByTo {
   '/console/playground': typeof AuthenticatedConsolePlaygroundRoute
   '/console/profile': typeof AuthenticatedConsoleProfileRoute
   '/console/quizzes': typeof AuthenticatedConsoleQuizzesRoute
+  '/console/realtime': typeof AuthenticatedConsoleRealtimeRoute
   '/console/repos': typeof AuthenticatedConsoleReposRoute
   '/console/security': typeof AuthenticatedConsoleSecurityRoute
   '/console/settings': typeof AuthenticatedConsoleSettingsRoute
@@ -451,6 +460,7 @@ export interface FileRoutesById {
   '/_authenticated/console/playground': typeof AuthenticatedConsolePlaygroundRoute
   '/_authenticated/console/profile': typeof AuthenticatedConsoleProfileRoute
   '/_authenticated/console/quizzes': typeof AuthenticatedConsoleQuizzesRoute
+  '/_authenticated/console/realtime': typeof AuthenticatedConsoleRealtimeRoute
   '/_authenticated/console/repos': typeof AuthenticatedConsoleReposRoute
   '/_authenticated/console/security': typeof AuthenticatedConsoleSecurityRoute
   '/_authenticated/console/settings': typeof AuthenticatedConsoleSettingsRoute
@@ -501,6 +511,7 @@ export interface FileRouteTypes {
     | '/console/playground'
     | '/console/profile'
     | '/console/quizzes'
+    | '/console/realtime'
     | '/console/repos'
     | '/console/security'
     | '/console/settings'
@@ -548,6 +559,7 @@ export interface FileRouteTypes {
     | '/console/playground'
     | '/console/profile'
     | '/console/quizzes'
+    | '/console/realtime'
     | '/console/repos'
     | '/console/security'
     | '/console/settings'
@@ -597,6 +609,7 @@ export interface FileRouteTypes {
     | '/_authenticated/console/playground'
     | '/_authenticated/console/profile'
     | '/_authenticated/console/quizzes'
+    | '/_authenticated/console/realtime'
     | '/_authenticated/console/repos'
     | '/_authenticated/console/security'
     | '/_authenticated/console/settings'
@@ -849,6 +862,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConsoleReposRouteImport
       parentRoute: typeof AuthenticatedConsoleRoute
     }
+    '/_authenticated/console/realtime': {
+      id: '/_authenticated/console/realtime'
+      path: '/realtime'
+      fullPath: '/console/realtime'
+      preLoaderRoute: typeof AuthenticatedConsoleRealtimeRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
     '/_authenticated/console/quizzes': {
       id: '/_authenticated/console/quizzes'
       path: '/quizzes'
@@ -981,6 +1001,7 @@ interface AuthenticatedConsoleRouteChildren {
   AuthenticatedConsolePlaygroundRoute: typeof AuthenticatedConsolePlaygroundRoute
   AuthenticatedConsoleProfileRoute: typeof AuthenticatedConsoleProfileRoute
   AuthenticatedConsoleQuizzesRoute: typeof AuthenticatedConsoleQuizzesRoute
+  AuthenticatedConsoleRealtimeRoute: typeof AuthenticatedConsoleRealtimeRoute
   AuthenticatedConsoleReposRoute: typeof AuthenticatedConsoleReposRoute
   AuthenticatedConsoleSecurityRoute: typeof AuthenticatedConsoleSecurityRoute
   AuthenticatedConsoleSettingsRoute: typeof AuthenticatedConsoleSettingsRoute
@@ -1009,6 +1030,7 @@ const AuthenticatedConsoleRouteChildren: AuthenticatedConsoleRouteChildren = {
   AuthenticatedConsolePlaygroundRoute: AuthenticatedConsolePlaygroundRoute,
   AuthenticatedConsoleProfileRoute: AuthenticatedConsoleProfileRoute,
   AuthenticatedConsoleQuizzesRoute: AuthenticatedConsoleQuizzesRoute,
+  AuthenticatedConsoleRealtimeRoute: AuthenticatedConsoleRealtimeRoute,
   AuthenticatedConsoleReposRoute: AuthenticatedConsoleReposRoute,
   AuthenticatedConsoleSecurityRoute: AuthenticatedConsoleSecurityRoute,
   AuthenticatedConsoleSettingsRoute: AuthenticatedConsoleSettingsRoute,
