@@ -29,7 +29,15 @@ export function Footer() {
             <li><Link to="/paths" className="hover:text-neon-cyan">Learning Paths</Link></li>
             <li><Link to="/playground" className="hover:text-neon-cyan">AI Playground</Link></li>
             <li><Link to="/projects" className="hover:text-neon-cyan">Mini Projects</Link></li>
+            <li><Link to="/blog" className="hover:text-neon-cyan">Blog</Link></li>
           </ul>
+          {stats && (
+            <div className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Eye className="size-3.5 text-neon-cyan" />
+              {stats.totalViews.toLocaleString()} زيارة · {stats.today.visitors.toLocaleString()} زائر اليوم
+            </div>
+          )}
+
         </div>
 
         <div>
