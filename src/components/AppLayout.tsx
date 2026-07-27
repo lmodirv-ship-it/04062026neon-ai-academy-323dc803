@@ -1,15 +1,19 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Toaster } from "sonner";
 import {
-  Home, Target, Route as RouteIcon, BookOpen, Sparkles, Rocket,
+  Home, Target, Route as RouteIcon, BookOpen, Sparkles, Rocket, GraduationCap,
   ListChecks, Trophy, Wrench, User as UserIcon, Crown, Flame, Bell, Search, Shield,
+  LayoutDashboard, LogIn, LogOut,
 } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
+import { useAuth } from "@/hooks/use-auth";
 import { getLevelInfo } from "@/lib/services/userService";
 import { PWAInstall } from "@/components/PWAInstall";
 
 const nav = [
   { to: "/", label: "Home", icon: Home },
+  { to: "/learn", label: "Program", icon: GraduationCap },
+  { to: "/dashboard", label: "My Dashboard", icon: LayoutDashboard },
   { to: "/missions", label: "Daily Mission", icon: Target },
   { to: "/paths", label: "Learning Paths", icon: RouteIcon },
   { to: "/lessons", label: "Lessons", icon: BookOpen },
@@ -19,19 +23,24 @@ const nav = [
   { to: "/tools", label: "AI Tools", icon: Wrench },
   { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
   { to: "/profile", label: "Profile", icon: UserIcon },
-  { to: "/admin", label: "Admin", icon: Shield },
+] as const;
+
+const editorNav = [
+  { to: "/studio", label: "Content Studio", icon: Shield },
 ] as const;
 
 const bottom = [
   { to: "/", label: "Home", icon: Home },
-  { to: "/missions", label: "Mission", icon: Target },
+  { to: "/learn", label: "Program", icon: GraduationCap },
   { to: "/paths", label: "Paths", icon: RouteIcon },
   { to: "/playground", label: "Play", icon: Sparkles },
-  { to: "/profile", label: "Profile", icon: UserIcon },
+  { to: "/dashboard", label: "Me", icon: LayoutDashboard },
 ] as const;
+
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const user = useUser();
+  const { isEditor } = useAuth();
   const lvl = getLevelInfo(user.xp);
 
   return (
@@ -51,7 +60,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           {nav.map((item) => (
             <SideLink key={item.to} {...item} />
           ))}
+          {isEditor && editorNav.map((item) => <SideLink key={item.to} {...item} />)}
         </nav>
+
         <div className="mt-2 p-4 rounded-2xl border border-neon-orange/40 bg-gradient-to-br from-neon-orange/10 to-transparent text-center">
           <Crown className="size-5 text-neon-orange mx-auto mb-1" />
           <div className="text-sm font-bold text-neon-orange">HN-AI PREMIUM</div>
@@ -114,13 +125,8 @@ function TopBar({ streak, level, levelName }: { streak: number; level: number; l
           <Bell className="size-4" />
           <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-neon-pink text-neon-pink pulse-dot" />
         </button>
-        <Link to="/profile" className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full glass border-neon-purple/40 hover:border-neon-purple hover:glow-purple transition">
-          <div className="size-7 rounded-full bg-gradient-to-br from-neon-purple to-neon-blue grid place-items-center text-xs ring-2 ring-neon-purple/40">👑</div>
-          <div className="hidden sm:block leading-tight">
-            <div className="text-xs font-semibold">{levelName}</div>
-            <div className="text-[10px] text-muted-foreground">Level {level}</div>
-          </div>
-        </Link>
+        <AccountButton levelName={levelName} level={level} />
+
       </div>
       {/* hidden helper to silence unused */}
       <span className="hidden">{loc.pathname}</span>
@@ -159,5 +165,40 @@ function BottomNav() {
         );
       })}
     </nav>
+  );
+}
+
+function AccountButton({ levelName, level }: { levelName: string; level: number }) {
+  const { user, signOut } = useAuth();
+
+  if (!user) {
+    return (
+      <Link
+        to="/auth"
+        className="flex items-center gap-2 px-3 py-2 rounded-full glass border-neon-purple/40 hover:border-neon-purple hover:glow-purple transition text-sm font-semibold"
+      >
+        <LogIn className="size-4" />
+        <span className="hidden sm:inline">دخول</span>
+      </Link>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <Link to="/dashboard" className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full glass border-neon-purple/40 hover:border-neon-purple hover:glow-purple transition">
+        <div className="size-7 rounded-full bg-gradient-to-br from-neon-purple to-neon-blue grid place-items-center text-xs ring-2 ring-neon-purple/40">👑</div>
+        <div className="hidden sm:block leading-tight">
+          <div className="text-xs font-semibold">{levelName}</div>
+          <div className="text-[10px] text-muted-foreground">Level {level}</div>
+        </div>
+      </Link>
+      <button
+        onClick={() => signOut()}
+        title="تسجيل الخروج"
+        className="size-9 grid place-items-center rounded-full glass hover:border-neon-pink/40 text-muted-foreground hover:text-neon-pink transition"
+      >
+        <LogOut className="size-4" />
+      </button>
+    </div>
   );
 }

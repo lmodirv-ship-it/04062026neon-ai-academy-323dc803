@@ -17,12 +17,18 @@ import { Route as PlaygroundRouteImport } from './routes/playground'
 import { Route as MissionsRouteImport } from './routes/missions'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as DownloadRouteImport } from './routes/download'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PathsIndexRouteImport } from './routes/paths/index'
 import { Route as LessonsIndexRouteImport } from './routes/lessons/index'
+import { Route as LearnIndexRouteImport } from './routes/learn/index'
 import { Route as PathsSlugRouteImport } from './routes/paths/$slug'
 import { Route as LessonsIdRouteImport } from './routes/lessons/$id'
+import { Route as LearnSlugRouteImport } from './routes/learn/$slug'
+import { Route as AuthenticatedStudioRouteImport } from './routes/_authenticated/studio'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
@@ -64,9 +70,18 @@ const DownloadRoute = DownloadRouteImport.update({
   path: '/download',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -84,6 +99,11 @@ const LessonsIndexRoute = LessonsIndexRouteImport.update({
   path: '/lessons/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LearnIndexRoute = LearnIndexRouteImport.update({
+  id: '/learn/',
+  path: '/learn/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PathsSlugRoute = PathsSlugRouteImport.update({
   id: '/paths/$slug',
   path: '/paths/$slug',
@@ -94,10 +114,26 @@ const LessonsIdRoute = LessonsIdRouteImport.update({
   path: '/lessons/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LearnSlugRoute = LearnSlugRouteImport.update({
+  id: '/learn/$slug',
+  path: '/learn/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedStudioRoute = AuthenticatedStudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/download': typeof DownloadRoute
   '/leaderboard': typeof LeaderboardRoute
   '/missions': typeof MissionsRoute
@@ -106,14 +142,19 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/studio': typeof AuthenticatedStudioRoute
+  '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/download': typeof DownloadRoute
   '/leaderboard': typeof LeaderboardRoute
   '/missions': typeof MissionsRoute
@@ -122,15 +163,21 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/studio': typeof AuthenticatedStudioRoute
+  '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/learn': typeof LearnIndexRoute
   '/lessons': typeof LessonsIndexRoute
   '/paths': typeof PathsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/download': typeof DownloadRoute
   '/leaderboard': typeof LeaderboardRoute
   '/missions': typeof MissionsRoute
@@ -139,8 +186,12 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/studio': typeof AuthenticatedStudioRoute
+  '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
 }
@@ -149,6 +200,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/auth'
     | '/download'
     | '/leaderboard'
     | '/missions'
@@ -157,14 +209,19 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/dashboard'
+    | '/studio'
+    | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/learn/'
     | '/lessons/'
     | '/paths/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin'
+    | '/auth'
     | '/download'
     | '/leaderboard'
     | '/missions'
@@ -173,14 +230,20 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/dashboard'
+    | '/studio'
+    | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/learn'
     | '/lessons'
     | '/paths'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/admin'
+    | '/auth'
     | '/download'
     | '/leaderboard'
     | '/missions'
@@ -189,15 +252,21 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/studio'
+    | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/learn/'
     | '/lessons/'
     | '/paths/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
   DownloadRoute: typeof DownloadRoute
   LeaderboardRoute: typeof LeaderboardRoute
   MissionsRoute: typeof MissionsRoute
@@ -206,8 +275,10 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   QuizRoute: typeof QuizRoute
   ToolsRoute: typeof ToolsRoute
+  LearnSlugRoute: typeof LearnSlugRoute
   LessonsIdRoute: typeof LessonsIdRoute
   PathsSlugRoute: typeof PathsSlugRoute
+  LearnIndexRoute: typeof LearnIndexRoute
   LessonsIndexRoute: typeof LessonsIndexRoute
   PathsIndexRoute: typeof PathsIndexRoute
 }
@@ -270,11 +341,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DownloadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -298,6 +383,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LessonsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/learn/': {
+      id: '/learn/'
+      path: '/learn'
+      fullPath: '/learn/'
+      preLoaderRoute: typeof LearnIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/paths/$slug': {
       id: '/paths/$slug'
       path: '/paths/$slug'
@@ -312,12 +404,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LessonsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/learn/$slug': {
+      id: '/learn/$slug'
+      path: '/learn/$slug'
+      fullPath: '/learn/$slug'
+      preLoaderRoute: typeof LearnSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/studio': {
+      id: '/_authenticated/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof AuthenticatedStudioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedStudioRoute: typeof AuthenticatedStudioRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedStudioRoute: AuthenticatedStudioRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
   DownloadRoute: DownloadRoute,
   LeaderboardRoute: LeaderboardRoute,
   MissionsRoute: MissionsRoute,
@@ -326,8 +454,10 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   QuizRoute: QuizRoute,
   ToolsRoute: ToolsRoute,
+  LearnSlugRoute: LearnSlugRoute,
   LessonsIdRoute: LessonsIdRoute,
   PathsSlugRoute: PathsSlugRoute,
+  LearnIndexRoute: LearnIndexRoute,
   LessonsIndexRoute: LessonsIndexRoute,
   PathsIndexRoute: PathsIndexRoute,
 }
