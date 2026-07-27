@@ -4,7 +4,6 @@ import { Loader2, Sparkles, Wand2, CheckCircle2, AlertTriangle, Rocket } from "l
 import {
   generateCourseOutline,
   saveCourseOutline,
-  saveOutlineLessonsPlaceholder,
   generateLessonContent,
   getCourseQueue,
   setSubtreeStatus,
@@ -50,7 +49,7 @@ export function GeneratorPanel() {
       generateCourseOutline({
         data: { topic, level, language, chapters, unitsPerChapter, lessonsPerUnit },
       }),
-    onSuccess: (o) => setOutline(o),
+    onSuccess: (o) => setOutline(o as CourseOutline),
   });
 
   const saveMut = useMutation({
