@@ -146,7 +146,85 @@ function Dashboard() {
           )}
         </div>
       </section>
+
+      <div className="grid lg:grid-cols-2 gap-6">
+        <section className="glass rounded-3xl p-6 border border-border/40">
+          <h2 className="font-display text-xl font-bold mb-4 flex items-center gap-2">
+            <CalendarDays className="size-5 text-neon-cyan" /> التقويم الدراسي
+          </h2>
+          <div className="grid grid-cols-7 gap-2 text-center">
+            {week.map((d) => (
+              <div key={d.label} className="space-y-1">
+                <div className="text-[10px] text-muted-foreground">{d.label.slice(0, 3)}</div>
+                <div
+                  className={`aspect-square rounded-xl grid place-items-center text-sm font-semibold border ${
+                    d.active
+                      ? "bg-gradient-to-br from-neon-purple to-neon-blue text-white border-transparent glow-purple"
+                      : d.today
+                        ? "border-neon-cyan/60 text-neon-cyan"
+                        : "border-border/40 text-muted-foreground"
+                  }`}
+                >
+                  {d.day}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="glass rounded-3xl p-6 border border-border/40">
+          <h2 className="font-display text-xl font-bold mb-4 flex items-center gap-2">
+            <Award className="size-5 text-neon-orange" /> الشارات
+          </h2>
+          <div className="grid grid-cols-4 gap-3">
+            {badges.map((b) => (
+              <div key={b.name} className={`rounded-2xl p-3 text-center border ${b.got ? "border-neon-orange/50" : "border-border/40 opacity-50"}`}>
+                <b.icon className={`size-5 mx-auto mb-2 ${b.got ? "text-neon-orange" : "text-muted-foreground"}`} />
+                <div className="text-[11px] leading-tight">{b.name}</div>
+              </div>
+            ))}
+          </div>
+          <Link to="/achievements" className="text-sm text-neon-cyan mt-4 inline-block">كل الإنجازات →</Link>
+        </section>
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-6">
+        <section className="glass rounded-3xl p-6 border border-border/40">
+          <h2 className="font-display text-xl font-bold mb-4 flex items-center gap-2">
+            <Sparkles className="size-5 text-neon-purple" /> دروس مقترحة
+          </h2>
+          <div className="space-y-2">
+            {suggested.length === 0 && <p className="text-sm text-muted-foreground">لا توجد اقتراحات حاليًا.</p>}
+            {suggested.map((l) => (
+              <Link
+                key={l.id}
+                to="/learn/$slug"
+                params={{ slug: l.slug }}
+                className="flex items-center justify-between gap-3 rounded-xl border border-border/40 px-4 py-3 hover:border-neon-purple/50 transition"
+              >
+                <span className="text-sm font-medium truncate">{l.title}</span>
+                <span className="text-xs text-muted-foreground shrink-0">{l.duration_minutes} د</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="glass rounded-3xl p-6 border border-border/40">
+          <h2 className="font-display text-xl font-bold mb-4 flex items-center gap-2">
+            <Megaphone className="size-5 text-neon-pink" /> إعلانات المنصة
+          </h2>
+          <div className="space-y-3">
+            {announcements.map((a) => (
+              <div key={a.title} className="rounded-xl border border-border/40 px-4 py-3">
+                <div className="font-semibold text-sm">{a.title}</div>
+                <p className="text-xs text-muted-foreground mt-1">{a.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
+
   );
 }
 
