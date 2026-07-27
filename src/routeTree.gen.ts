@@ -17,6 +17,8 @@ import { Route as PlaygroundRouteImport } from './routes/playground'
 import { Route as MissionsRouteImport } from './routes/missions'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as DownloadRouteImport } from './routes/download'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as ChatRouteImport } from './routes/chat'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
@@ -33,9 +35,11 @@ import { Route as LearnSlugRouteImport } from './routes/learn/$slug'
 import { Route as CoursesSlugRouteImport } from './routes/courses/$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as AuthenticatedStudioRouteImport } from './routes/_authenticated/studio'
+import { Route as AuthenticatedStatsRouteImport } from './routes/_authenticated/stats'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedConsoleRouteImport } from './routes/_authenticated/console'
 import { Route as AuthenticatedCertificatesRouteImport } from './routes/_authenticated/certificates'
+import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as AuthenticatedConsoleIndexRouteImport } from './routes/_authenticated/console/index'
 import { Route as AuthenticatedConsoleTransactionsRouteImport } from './routes/_authenticated/console/transactions'
 import { Route as AuthenticatedConsoleTrafficRouteImport } from './routes/_authenticated/console/traffic'
@@ -101,6 +105,16 @@ const LeaderboardRoute = LeaderboardRouteImport.update({
 const DownloadRoute = DownloadRouteImport.update({
   id: '/download',
   path: '/download',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -182,6 +196,11 @@ const AuthenticatedStudioRoute = AuthenticatedStudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedStatsRoute = AuthenticatedStatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -196,6 +215,12 @@ const AuthenticatedCertificatesRoute =
   AuthenticatedCertificatesRouteImport.update({
     id: '/certificates',
     path: '/certificates',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAchievementsRoute =
+  AuthenticatedAchievementsRouteImport.update({
+    id: '/achievements',
+    path: '/achievements',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedConsoleIndexRoute =
@@ -358,6 +383,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/chat': typeof ChatRoute
+  '/community': typeof CommunityRoute
   '/download': typeof DownloadRoute
   '/leaderboard': typeof LeaderboardRoute
   '/missions': typeof MissionsRoute
@@ -366,9 +393,11 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/achievements': typeof AuthenticatedAchievementsRoute
   '/certificates': typeof AuthenticatedCertificatesRoute
   '/console': typeof AuthenticatedConsoleRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/stats': typeof AuthenticatedStatsRoute
   '/studio': typeof AuthenticatedStudioRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
@@ -412,6 +441,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/chat': typeof ChatRoute
+  '/community': typeof CommunityRoute
   '/download': typeof DownloadRoute
   '/leaderboard': typeof LeaderboardRoute
   '/missions': typeof MissionsRoute
@@ -420,8 +451,10 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/achievements': typeof AuthenticatedAchievementsRoute
   '/certificates': typeof AuthenticatedCertificatesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/stats': typeof AuthenticatedStatsRoute
   '/studio': typeof AuthenticatedStudioRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
@@ -467,6 +500,8 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/chat': typeof ChatRoute
+  '/community': typeof CommunityRoute
   '/download': typeof DownloadRoute
   '/leaderboard': typeof LeaderboardRoute
   '/missions': typeof MissionsRoute
@@ -475,9 +510,11 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/_authenticated/achievements': typeof AuthenticatedAchievementsRoute
   '/_authenticated/certificates': typeof AuthenticatedCertificatesRoute
   '/_authenticated/console': typeof AuthenticatedConsoleRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/stats': typeof AuthenticatedStatsRoute
   '/_authenticated/studio': typeof AuthenticatedStudioRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
@@ -523,6 +560,8 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/chat'
+    | '/community'
     | '/download'
     | '/leaderboard'
     | '/missions'
@@ -531,9 +570,11 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/achievements'
     | '/certificates'
     | '/console'
     | '/dashboard'
+    | '/stats'
     | '/studio'
     | '/blog/$slug'
     | '/courses/$slug'
@@ -577,6 +618,8 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/chat'
+    | '/community'
     | '/download'
     | '/leaderboard'
     | '/missions'
@@ -585,8 +628,10 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/achievements'
     | '/certificates'
     | '/dashboard'
+    | '/stats'
     | '/studio'
     | '/blog/$slug'
     | '/courses/$slug'
@@ -631,6 +676,8 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/admin'
     | '/auth'
+    | '/chat'
+    | '/community'
     | '/download'
     | '/leaderboard'
     | '/missions'
@@ -639,9 +686,11 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/_authenticated/achievements'
     | '/_authenticated/certificates'
     | '/_authenticated/console'
     | '/_authenticated/dashboard'
+    | '/_authenticated/stats'
     | '/_authenticated/studio'
     | '/blog/$slug'
     | '/courses/$slug'
@@ -687,6 +736,8 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
+  ChatRoute: typeof ChatRoute
+  CommunityRoute: typeof CommunityRoute
   DownloadRoute: typeof DownloadRoute
   LeaderboardRoute: typeof LeaderboardRoute
   MissionsRoute: typeof MissionsRoute
@@ -764,6 +815,20 @@ declare module '@tanstack/react-router' {
       path: '/download'
       fullPath: '/download'
       preLoaderRoute: typeof DownloadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -878,6 +943,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStudioRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/stats': {
+      id: '/_authenticated/stats'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof AuthenticatedStatsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -897,6 +969,13 @@ declare module '@tanstack/react-router' {
       path: '/certificates'
       fullPath: '/certificates'
       preLoaderRoute: typeof AuthenticatedCertificatesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/achievements': {
+      id: '/_authenticated/achievements'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/console/': {
@@ -1147,16 +1226,20 @@ const AuthenticatedConsoleRouteWithChildren =
   AuthenticatedConsoleRoute._addFileChildren(AuthenticatedConsoleRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAchievementsRoute: typeof AuthenticatedAchievementsRoute
   AuthenticatedCertificatesRoute: typeof AuthenticatedCertificatesRoute
   AuthenticatedConsoleRoute: typeof AuthenticatedConsoleRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedStatsRoute: typeof AuthenticatedStatsRoute
   AuthenticatedStudioRoute: typeof AuthenticatedStudioRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAchievementsRoute: AuthenticatedAchievementsRoute,
   AuthenticatedCertificatesRoute: AuthenticatedCertificatesRoute,
   AuthenticatedConsoleRoute: AuthenticatedConsoleRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedStatsRoute: AuthenticatedStatsRoute,
   AuthenticatedStudioRoute: AuthenticatedStudioRoute,
 }
 
@@ -1168,6 +1251,8 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
+  ChatRoute: ChatRoute,
+  CommunityRoute: CommunityRoute,
   DownloadRoute: DownloadRoute,
   LeaderboardRoute: LeaderboardRoute,
   MissionsRoute: MissionsRoute,
