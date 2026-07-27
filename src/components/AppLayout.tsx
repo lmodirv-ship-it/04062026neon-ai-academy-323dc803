@@ -3,7 +3,7 @@ import { Toaster } from "sonner";
 import {
   Home, Target, Route as RouteIcon, BookOpen, Sparkles, Rocket, GraduationCap,
   ListChecks, Trophy, Wrench, User as UserIcon, Crown, Flame, Bell, Search, Shield,
-  LayoutDashboard, LogIn, LogOut, Newspaper, Library, Award,
+  LayoutDashboard, LogIn, LogOut, Newspaper, Library, Award, Bot, Users, BarChart3,
 } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
 import { useAuth } from "@/hooks/use-auth";
@@ -16,7 +16,10 @@ const nav = [
   { to: "/learn", label: "Program", icon: GraduationCap },
   { to: "/courses", label: "Courses", icon: Library },
   { to: "/dashboard", label: "My Dashboard", icon: LayoutDashboard },
+  { to: "/chat", label: "HN AI Chat", icon: Bot },
   { to: "/certificates", label: "Certificates", icon: Award },
+  { to: "/achievements", label: "Achievements", icon: Trophy },
+  { to: "/stats", label: "My Stats", icon: BarChart3 },
   { to: "/missions", label: "Daily Mission", icon: Target },
   { to: "/paths", label: "Learning Paths", icon: RouteIcon },
   { to: "/lessons", label: "Lessons", icon: BookOpen },
@@ -24,6 +27,7 @@ const nav = [
   { to: "/projects", label: "Mini Projects", icon: Rocket },
   { to: "/quiz", label: "Quiz & Challenges", icon: ListChecks },
   { to: "/tools", label: "AI Tools", icon: Wrench },
+  { to: "/community", label: "Community", icon: Users },
   { to: "/blog", label: "Blog", icon: Newspaper },
   { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
   { to: "/profile", label: "Profile", icon: UserIcon },
