@@ -99,7 +99,7 @@ const ROLE_LABEL: Record<string, string> = {
 };
 
 function ConsoleLayout() {
-  const { role, roles, rolesLoaded, user, can, signOut } = useAuth();
+  const { role, rolesLoaded, user, can, signOut } = useAuth();
   const [open, setOpen] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(NAV.map((g) => [g.group, true])),
   );
