@@ -83,7 +83,8 @@ const NAV = [
   },
 ] as const;
 
-const ALL_ITEMS = NAV.flatMap((g) => g.items);
+type NavItem = (typeof NAV)[number]["items"][number];
+const ALL_ITEMS: NavItem[] = NAV.flatMap((g) => [...g.items] as NavItem[]);
 
 function ConsoleLayout() {
   const { role, user, signOut } = useAuth();
@@ -106,7 +107,7 @@ function ConsoleLayout() {
     ? ALL_ITEMS.filter((i) => i.label.includes(q.trim()))
     : null;
 
-  const navLink = (it: (typeof ALL_ITEMS)[number]) => (
+  const navLink = (it: NavItem) => (
     <Link
       key={it.to}
       to={it.to}
