@@ -108,6 +108,24 @@ export type Database = {
           },
         ]
       }
+      daily_stats: {
+        Row: {
+          day: string
+          views: number
+          visitors: number
+        }
+        Insert: {
+          day: string
+          views?: number
+          visitors?: number
+        }
+        Update: {
+          day?: string
+          views?: number
+          visitors?: number
+        }
+        Relationships: []
+      }
       lesson_blocks: {
         Row: {
           content: string
@@ -283,6 +301,119 @@ export type Database = {
             columns: ["program_id"]
             isOneToOne: false
             referencedRelation: "programs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      page_views: {
+        Row: {
+          country: string | null
+          created_at: string
+          id: number
+          path: string
+          referrer: string | null
+          session_id: string | null
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          id?: number
+          path: string
+          referrer?: string | null
+          session_id?: string | null
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          id?: number
+          path?: string
+          referrer?: string | null
+          session_id?: string | null
+        }
+        Relationships: []
+      }
+      post_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          order_index: number
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          order_index?: number
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          order_index?: number
+          slug?: string
+        }
+        Relationships: []
+      }
+      posts: {
+        Row: {
+          author_id: string | null
+          category_id: string | null
+          content: string
+          cover_url: string | null
+          created_at: string
+          excerpt: string | null
+          id: string
+          published_at: string | null
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          title: string
+          updated_at: string
+          views: number
+        }
+        Insert: {
+          author_id?: string | null
+          category_id?: string | null
+          content?: string
+          cover_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          title: string
+          updated_at?: string
+          views?: number
+        }
+        Update: {
+          author_id?: string | null
+          category_id?: string | null
+          content?: string
+          cover_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          title?: string
+          updated_at?: string
+          views?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "post_categories"
             referencedColumns: ["id"]
           },
         ]
@@ -568,6 +699,15 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      track_page_view: {
+        Args: {
+          _country?: string
+          _path: string
+          _referrer?: string
+          _session: string
+        }
+        Returns: undefined
       }
     }
     Enums: {
