@@ -157,7 +157,7 @@ function ConsoleLayout() {
       <nav className="flex-1 overflow-y-auto pe-1 space-y-2">
         {filtered
           ? (filtered.length ? filtered.map(navLink) : <p className="text-xs text-muted-foreground px-2 py-6 text-center">لا توجد نتائج</p>)
-          : NAV.map((g) => {
+          : allowedGroups.map((g) => {
               const isOpen = open[g.group];
               return (
                 <div key={g.group}>
