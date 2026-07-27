@@ -3,7 +3,7 @@ import { useState } from "react";
 import {
   Activity, BarChart3, Bell, BookOpen, ChevronDown, CreditCard, Crown, FileCode2, FileText,
   FlaskConical, Globe, GraduationCap, Home, KeyRound, LayoutGrid, LifeBuoy, LineChart, Lock,
-  LogOut, Menu, MessageSquare, Newspaper, Receipt, Search, Settings as SettingsIcon,
+  LogOut, Menu, MessageSquare, Newspaper, Radio, Receipt, Search, Settings as SettingsIcon,
   Shield, Tags, Trophy, User, UserCog, Users, X,
 } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
@@ -25,11 +25,14 @@ export const Route = createFileRoute("/_authenticated/console")({
 
 const NAV = [
   {
-    group: "اللوحة الرئيسية", icon: Home,
-    items: [{ to: "/console", label: "الرئيسية", icon: LayoutGrid, exact: true }],
+    group: "اللوحة الرئيسية", icon: Home, cap: "console",
+    items: [
+      { to: "/console", label: "الرئيسية", icon: LayoutGrid, exact: true },
+      { to: "/console/realtime", label: "المراقبة اللحظية", icon: Radio },
+    ],
   },
   {
-    group: "إدارة المحتوى التعليمي", icon: BookOpen,
+    group: "إدارة المحتوى التعليمي", icon: BookOpen, cap: "content",
     items: [
       { to: "/console/courses", label: "المسارات والدورات", icon: BookOpen },
       { to: "/console/lessons", label: "الدروس والوحدات", icon: FileText },
@@ -38,7 +41,7 @@ const NAV = [
     ],
   },
   {
-    group: "بيئات الذكاء الاصطناعي", icon: FlaskConical,
+    group: "بيئات الذكاء الاصطناعي", icon: FlaskConical, cap: "content",
     items: [
       { to: "/console/playground", label: "المختبر التفاعلي", icon: FlaskConical },
       { to: "/console/api", label: "مفاتيح الـ API والاستهلاك", icon: KeyRound },
@@ -46,7 +49,7 @@ const NAV = [
     ],
   },
   {
-    group: "الطلاب والمجتمع", icon: Users,
+    group: "الطلاب والمجتمع", icon: Users, cap: "students",
     items: [
       { to: "/console/students", label: "إدارة الطلاب", icon: Users },
       { to: "/console/instructors", label: "المدربون والمساعدون", icon: UserCog },
@@ -55,7 +58,7 @@ const NAV = [
     ],
   },
   {
-    group: "الاشتراكات والمبيعات", icon: CreditCard,
+    group: "الاشتراكات والمبيعات", icon: CreditCard, cap: "billing",
     items: [
       { to: "/console/plans", label: "الاشتراكات والخطط", icon: CreditCard },
       { to: "/console/transactions", label: "المدفوعات والفواتير", icon: Receipt },
@@ -63,7 +66,7 @@ const NAV = [
     ],
   },
   {
-    group: "التحليلات والتقارير", icon: BarChart3,
+    group: "التحليلات والتقارير", icon: BarChart3, cap: "analytics",
     items: [
       { to: "/console/learning", label: "تحليلات التعلم", icon: BarChart3 },
       { to: "/console/traffic", label: "إحصائيات الزوار", icon: LineChart },
@@ -71,34 +74,52 @@ const NAV = [
     ],
   },
   {
-    group: "النظام والإعدادات", icon: SettingsIcon,
+    group: "النظام والإعدادات", icon: SettingsIcon, cap: "system",
     items: [
       { to: "/console/support", label: "الدعم والرسائل", icon: LifeBuoy },
       { to: "/console/notifications", label: "الإشعارات", icon: Bell },
       { to: "/console/logs", label: "سجل الأنشطة", icon: Activity },
       { to: "/console/settings", label: "إعدادات المنصة", icon: SettingsIcon },
       { to: "/console/security", label: "الأمان والصلاحيات", icon: Lock },
-      { to: "/console/profile", label: "الملف الشخصي", icon: User },
+    ],
+  },
+  {
+    group: "حسابي", icon: User, cap: "console",
+    items: [
+      { to: "/console/account", label: "إعدادات الحساب", icon: User },
+      { to: "/console/profile", label: "الملف الشخصي", icon: UserCog },
     ],
   },
 ] as const;
 
 type NavItem = (typeof NAV)[number]["items"][number];
-const ALL_ITEMS: NavItem[] = NAV.flatMap((g) => [...g.items] as NavItem[]);
+
+const ROLE_LABEL: Record<string, string> = {
+  owner: "مالك المنصة", admin: "مدير المنصة", editor: "محرّر المحتوى", student: "طالب",
+};
 
 function ConsoleLayout() {
-  const { role, user, signOut } = useAuth();
+  const { role, rolesLoaded, user, can, signOut } = useAuth();
   const [open, setOpen] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(NAV.map((g) => [g.group, true])),
   );
   const [mobileOpen, setMobileOpen] = useState(false);
   const [q, setQ] = useState("");
 
-  if (role && role !== "admin") {
+  const allowedGroups = NAV.filter((g) => can(g.cap as never));
+  const ALL_ITEMS: NavItem[] = allowedGroups.flatMap((g) => [...g.items] as NavItem[]);
+
+  if (rolesLoaded && !can("console")) {
     return (
-      <div className="max-w-md mx-auto text-center py-20" dir="rtl">
-        <Shield className="size-10 mx-auto text-neon-pink mb-4" />
-        <h1 className="font-display text-2xl font-bold">صلاحية المدير مطلوبة</h1>
+      <div className="max-w-md mx-auto text-center py-20 space-y-3" dir="rtl">
+        <Shield className="size-10 mx-auto text-neon-pink" />
+        <h1 className="font-display text-2xl font-bold">هذه المنطقة مخصّصة لفريق الإدارة</h1>
+        <p className="text-sm text-muted-foreground">
+          حسابك مسجَّل كـ«{ROLE_LABEL[role ?? "student"]}» ولا يملك صلاحية الدخول للوحة التحكم.
+        </p>
+        <Link to="/dashboard" className="inline-block rounded-xl bg-gradient-to-l from-neon-purple to-neon-blue px-4 py-2 text-sm font-semibold text-white">
+          العودة إلى لوحتي
+        </Link>
       </div>
     );
   }
@@ -106,6 +127,7 @@ function ConsoleLayout() {
   const filtered = q.trim()
     ? ALL_ITEMS.filter((i) => i.label.includes(q.trim()))
     : null;
+
 
   const navLink = (it: NavItem) => (
     <Link
@@ -135,7 +157,7 @@ function ConsoleLayout() {
       <nav className="flex-1 overflow-y-auto pe-1 space-y-2">
         {filtered
           ? (filtered.length ? filtered.map(navLink) : <p className="text-xs text-muted-foreground px-2 py-6 text-center">لا توجد نتائج</p>)
-          : NAV.map((g) => {
+          : allowedGroups.map((g) => {
               const isOpen = open[g.group];
               return (
                 <div key={g.group}>
@@ -229,7 +251,7 @@ function ConsoleLayout() {
                     <div className="text-xs font-semibold truncate max-w-[140px]">
                       مرحبًا، {user?.user_metadata?.full_name ?? user?.email?.split("@")[0] ?? "المدير"}
                     </div>
-                    <div className="text-[10px] text-muted-foreground">مدير المنصة</div>
+                    <div className="text-[10px] text-muted-foreground">{ROLE_LABEL[role ?? "student"] ?? "—"}</div>
                   </div>
                   <div className="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-neon-purple to-neon-blue text-white text-xs font-bold">
                     {(user?.email ?? "A").slice(0, 1).toUpperCase()}
