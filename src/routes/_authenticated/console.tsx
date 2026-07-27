@@ -3,7 +3,7 @@ import { useState } from "react";
 import {
   Activity, BarChart3, Bell, BookOpen, ChevronDown, CreditCard, Crown, FileCode2, FileText,
   FlaskConical, Globe, GraduationCap, Home, KeyRound, LayoutGrid, LifeBuoy, LineChart, Lock,
-  LogOut, Menu, MessageSquare, Newspaper, Receipt, Search, Settings as SettingsIcon,
+  LogOut, Menu, MessageSquare, Newspaper, Radio, Receipt, Search, Settings as SettingsIcon,
   Shield, Tags, Trophy, User, UserCog, Users, X,
 } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
