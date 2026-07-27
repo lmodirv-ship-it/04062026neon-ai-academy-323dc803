@@ -160,3 +160,77 @@ export const adminUserAction = createServerFn({ method: "POST" })
     });
     return { ok: true };
   });
+
+/* ---------------- Realtime pulse (live metrics) ---------------- */
+
+async function assertStaff(context: { supabase: any; userId: string }) {
+  const { data: ok } = await context.supabase.rpc("can_edit_content", { _user_id: context.userId });
+  if (!ok) throw new Error("صلاحية غير كافية.");
+}
+
+export const getRealtimePulse = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertStaff(context);
+    const t0 = Date.now();
+    const now = Date.now();
+    const iso = (ms: number) => new Date(now - ms).toISOString();
+
+    const [views, progress, profiles, stats, lessons, notif, logs] = await Promise.all([
+      context.supabase.from("page_views").select("session_id, path, created_at").gte("created_at", iso(30 * 60e3)),
+      context.supabase.from("lesson_progress").select("user_id, status, updated_at").gte("updated_at", iso(24 * 3600e3)),
+      context.supabase.from("profiles").select("id, created_at").gte("created_at", iso(7 * 24 * 3600e3)),
+      context.supabase.from("user_stats").select("user_id, xp, streak"),
+      context.supabase.from("lessons").select("id, status"),
+      context.supabase.from("admin_notifications").select("id, is_read").eq("is_read", false),
+      context.supabase.from("audit_logs").select("actor_name, action, entity, created_at").order("created_at", { ascending: false }).limit(6),
+    ]);
+
+    const latency = Date.now() - t0;
+    const v = views.data ?? [];
+    const inLast = (m: number) => v.filter((r: any) => new Date(r.created_at).getTime() > now - m * 60e3);
+    const uniq = (rows: any[], k: string) => new Set(rows.map((r) => r[k]).filter(Boolean)).size;
+
+    const p = progress.data ?? [];
+    const pIn = (m: number) => p.filter((r: any) => new Date(r.updated_at).getTime() > now - m * 60e3);
+
+    const pr = profiles.data ?? [];
+    const startOfDay = new Date(); startOfDay.setHours(0, 0, 0, 0);
+
+    const topPaths = Object.entries(
+      inLast(30).reduce<Record<string, number>>((a, r: any) => ((a[r.path] = (a[r.path] ?? 0) + 1), a), {}),
+    ).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([path, hits]) => ({ path, hits }));
+
+    const ls = lessons.data ?? [];
+    const st = stats.data ?? [];
+
+    return {
+      at: new Date().toISOString(),
+      live: {
+        sessions5: uniq(inLast(5), "session_id"),
+        sessions30: uniq(inLast(30), "session_id"),
+        views5: inLast(5).length,
+        views30: v.length,
+        learners15: uniq(pIn(15), "user_id"),
+        learners24h: uniq(p, "user_id"),
+        completions24h: p.filter((r: any) => r.status === "completed").length,
+      },
+      users: {
+        total: st.length,
+        newToday: pr.filter((r: any) => new Date(r.created_at) >= startOfDay).length,
+        new7d: pr.length,
+        activeStreaks: st.filter((r: any) => (r.streak ?? 0) > 0).length,
+        totalXp: st.reduce((s: number, r: any) => s + (r.xp ?? 0), 0),
+      },
+      health: {
+        dbLatencyMs: latency,
+        dbOk: !views.error && !progress.error,
+        unreadAlerts: (notif.data ?? []).length,
+        draftLessons: ls.filter((l: any) => l.status !== "published").length,
+        publishedLessons: ls.filter((l: any) => l.status === "published").length,
+        lastActivityAt: (logs.data ?? [])[0]?.created_at ?? null,
+      },
+      topPaths,
+      recent: logs.data ?? [],
+    };
+  });
