@@ -24,6 +24,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PathsIndexRouteImport } from './routes/paths/index'
 import { Route as LessonsIndexRouteImport } from './routes/lessons/index'
 import { Route as LearnIndexRouteImport } from './routes/learn/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as PathsSlugRouteImport } from './routes/paths/$slug'
 import { Route as LessonsIdRouteImport } from './routes/lessons/$id'
 import { Route as LearnSlugRouteImport } from './routes/learn/$slug'
@@ -104,6 +105,11 @@ const LearnIndexRoute = LearnIndexRouteImport.update({
   path: '/learn/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PathsSlugRoute = PathsSlugRouteImport.update({
   id: '/paths/$slug',
   path: '/paths/$slug',
@@ -147,6 +153,7 @@ export interface FileRoutesByFullPath {
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
@@ -168,6 +175,7 @@ export interface FileRoutesByTo {
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/learn': typeof LearnIndexRoute
   '/lessons': typeof LessonsIndexRoute
   '/paths': typeof PathsIndexRoute
@@ -191,6 +199,7 @@ export interface FileRoutesById {
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
@@ -214,6 +223,7 @@ export interface FileRouteTypes {
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/blog/'
     | '/learn/'
     | '/lessons/'
     | '/paths/'
@@ -235,6 +245,7 @@ export interface FileRouteTypes {
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/blog'
     | '/learn'
     | '/lessons'
     | '/paths'
@@ -257,6 +268,7 @@ export interface FileRouteTypes {
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/blog/'
     | '/learn/'
     | '/lessons/'
     | '/paths/'
@@ -278,6 +290,7 @@ export interface RootRouteChildren {
   LearnSlugRoute: typeof LearnSlugRoute
   LessonsIdRoute: typeof LessonsIdRoute
   PathsSlugRoute: typeof PathsSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   LearnIndexRoute: typeof LearnIndexRoute
   LessonsIndexRoute: typeof LessonsIndexRoute
   PathsIndexRoute: typeof PathsIndexRoute
@@ -390,6 +403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/paths/$slug': {
       id: '/paths/$slug'
       path: '/paths/$slug'
@@ -457,6 +477,7 @@ const rootRouteChildren: RootRouteChildren = {
   LearnSlugRoute: LearnSlugRoute,
   LessonsIdRoute: LessonsIdRoute,
   PathsSlugRoute: PathsSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   LearnIndexRoute: LearnIndexRoute,
   LessonsIndexRoute: LessonsIndexRoute,
   PathsIndexRoute: PathsIndexRoute,
