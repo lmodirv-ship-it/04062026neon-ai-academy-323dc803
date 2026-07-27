@@ -20,10 +20,10 @@ export const Route = createFileRoute("/community")({
 
 function CommunityPage() {
   const { data: top } = useQuery({ queryKey: ["leaderboard"], queryFn: () => getLeaderboard() });
-  const { data: posts } = useQuery({ queryKey: ["posts", "community"], queryFn: () => listPosts({ data: {} } as never).catch(() => []) });
+  const { data: posts } = useQuery({ queryKey: ["posts", "community"], queryFn: () => listPosts() });
 
   const leaders = (top ?? []).slice(0, 5);
-  const articles = (Array.isArray(posts) ? posts : []).slice(0, 3);
+  const articles = (posts?.posts ?? []).slice(0, 3);
 
   return (
     <div className="space-y-6" dir="rtl">
