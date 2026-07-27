@@ -28,6 +28,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as PathsSlugRouteImport } from './routes/paths/$slug'
 import { Route as LessonsIdRouteImport } from './routes/lessons/$id'
 import { Route as LearnSlugRouteImport } from './routes/learn/$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as AuthenticatedStudioRouteImport } from './routes/_authenticated/studio'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 
@@ -125,6 +126,11 @@ const LearnSlugRoute = LearnSlugRouteImport.update({
   path: '/learn/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedStudioRoute = AuthenticatedStudioRouteImport.update({
   id: '/studio',
   path: '/studio',
@@ -150,6 +156,7 @@ export interface FileRoutesByFullPath {
   '/tools': typeof ToolsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/studio': typeof AuthenticatedStudioRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
@@ -172,6 +179,7 @@ export interface FileRoutesByTo {
   '/tools': typeof ToolsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/studio': typeof AuthenticatedStudioRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
@@ -196,6 +204,7 @@ export interface FileRoutesById {
   '/tools': typeof ToolsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/studio': typeof AuthenticatedStudioRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/dashboard'
     | '/studio'
+    | '/blog/$slug'
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
@@ -242,6 +252,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/dashboard'
     | '/studio'
+    | '/blog/$slug'
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/_authenticated/dashboard'
     | '/_authenticated/studio'
+    | '/blog/$slug'
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
@@ -287,6 +299,7 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   QuizRoute: typeof QuizRoute
   ToolsRoute: typeof ToolsRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   LearnSlugRoute: typeof LearnSlugRoute
   LessonsIdRoute: typeof LessonsIdRoute
   PathsSlugRoute: typeof PathsSlugRoute
@@ -431,6 +444,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/studio': {
       id: '/_authenticated/studio'
       path: '/studio'
@@ -474,6 +494,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   QuizRoute: QuizRoute,
   ToolsRoute: ToolsRoute,
+  BlogSlugRoute: BlogSlugRoute,
   LearnSlugRoute: LearnSlugRoute,
   LessonsIdRoute: LessonsIdRoute,
   PathsSlugRoute: PathsSlugRoute,
