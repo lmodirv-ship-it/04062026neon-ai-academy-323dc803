@@ -98,6 +98,50 @@ export type Database = {
         }
         Relationships: []
       }
+      certificates: {
+        Row: {
+          code: string
+          course_id: string | null
+          course_title: string
+          created_at: string
+          holder_name: string
+          id: string
+          issued_at: string
+          score: number
+          user_id: string
+        }
+        Insert: {
+          code: string
+          course_id?: string | null
+          course_title?: string
+          created_at?: string
+          holder_name?: string
+          id?: string
+          issued_at?: string
+          score?: number
+          user_id: string
+        }
+        Update: {
+          code?: string
+          course_id?: string | null
+          course_title?: string
+          created_at?: string
+          holder_name?: string
+          id?: string
+          issued_at?: string
+          score?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificates_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chapters: {
         Row: {
           course_id: string
@@ -210,6 +254,47 @@ export type Database = {
         }
         Relationships: []
       }
+      enrollments: {
+        Row: {
+          completed_at: string | null
+          course_id: string
+          created_at: string
+          id: string
+          last_lesson_id: string | null
+          progress: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          course_id: string
+          created_at?: string
+          id?: string
+          last_lesson_id?: string | null
+          progress?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          course_id?: string
+          created_at?: string
+          id?: string
+          last_lesson_id?: string | null
+          progress?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enrollments_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_blocks: {
         Row: {
           content: string
@@ -218,6 +303,7 @@ export type Database = {
           kind: string
           language: string | null
           lesson_id: string
+          meta: Json
           order_index: number
         }
         Insert: {
@@ -227,6 +313,7 @@ export type Database = {
           kind?: string
           language?: string | null
           lesson_id: string
+          meta?: Json
           order_index?: number
         }
         Update: {
@@ -236,6 +323,7 @@ export type Database = {
           kind?: string
           language?: string | null
           lesson_id?: string
+          meta?: Json
           order_index?: number
         }
         Relationships: [
@@ -565,6 +653,57 @@ export type Database = {
         }
         Relationships: []
       }
+      project_submissions: {
+        Row: {
+          created_at: string
+          demo_url: string | null
+          id: string
+          notes: string | null
+          project_slug: string
+          project_title: string
+          repo_url: string | null
+          review_notes: string | null
+          reviewed_at: string | null
+          reviewer_id: string | null
+          score: number
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          demo_url?: string | null
+          id?: string
+          notes?: string | null
+          project_slug: string
+          project_title?: string
+          repo_url?: string | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          score?: number
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          demo_url?: string | null
+          id?: string
+          notes?: string | null
+          project_slug?: string
+          project_title?: string
+          repo_url?: string | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          score?: number
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       question_attempts: {
         Row: {
           created_at: string
@@ -713,6 +852,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_notifications: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          is_read: boolean
+          kind: string
+          link: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          kind?: string
+          link?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          kind?: string
+          link?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {

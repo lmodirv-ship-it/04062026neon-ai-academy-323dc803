@@ -24,14 +24,18 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PathsIndexRouteImport } from './routes/paths/index'
 import { Route as LessonsIndexRouteImport } from './routes/lessons/index'
 import { Route as LearnIndexRouteImport } from './routes/learn/index'
+import { Route as CoursesIndexRouteImport } from './routes/courses/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as VerifyCodeRouteImport } from './routes/verify/$code'
 import { Route as PathsSlugRouteImport } from './routes/paths/$slug'
 import { Route as LessonsIdRouteImport } from './routes/lessons/$id'
 import { Route as LearnSlugRouteImport } from './routes/learn/$slug'
+import { Route as CoursesSlugRouteImport } from './routes/courses/$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as AuthenticatedStudioRouteImport } from './routes/_authenticated/studio'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedConsoleRouteImport } from './routes/_authenticated/console'
+import { Route as AuthenticatedCertificatesRouteImport } from './routes/_authenticated/certificates'
 import { Route as AuthenticatedConsoleIndexRouteImport } from './routes/_authenticated/console/index'
 import { Route as AuthenticatedConsoleTransactionsRouteImport } from './routes/_authenticated/console/transactions'
 import { Route as AuthenticatedConsoleTrafficRouteImport } from './routes/_authenticated/console/traffic'
@@ -133,9 +137,19 @@ const LearnIndexRoute = LearnIndexRouteImport.update({
   path: '/learn/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoursesIndexRoute = CoursesIndexRouteImport.update({
+  id: '/courses/',
+  path: '/courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyCodeRoute = VerifyCodeRouteImport.update({
+  id: '/verify/$code',
+  path: '/verify/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PathsSlugRoute = PathsSlugRouteImport.update({
@@ -151,6 +165,11 @@ const LessonsIdRoute = LessonsIdRouteImport.update({
 const LearnSlugRoute = LearnSlugRouteImport.update({
   id: '/learn/$slug',
   path: '/learn/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesSlugRoute = CoursesSlugRouteImport.update({
+  id: '/courses/$slug',
+  path: '/courses/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -173,6 +192,12 @@ const AuthenticatedConsoleRoute = AuthenticatedConsoleRouteImport.update({
   path: '/console',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCertificatesRoute =
+  AuthenticatedCertificatesRouteImport.update({
+    id: '/certificates',
+    path: '/certificates',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedConsoleIndexRoute =
   AuthenticatedConsoleIndexRouteImport.update({
     id: '/',
@@ -341,14 +366,18 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/certificates': typeof AuthenticatedCertificatesRoute
   '/console': typeof AuthenticatedConsoleRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/studio': typeof AuthenticatedStudioRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/courses/$slug': typeof CoursesSlugRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/verify/$code': typeof VerifyCodeRoute
   '/blog/': typeof BlogIndexRoute
+  '/courses/': typeof CoursesIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
@@ -391,13 +420,17 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/certificates': typeof AuthenticatedCertificatesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/studio': typeof AuthenticatedStudioRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/courses/$slug': typeof CoursesSlugRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/verify/$code': typeof VerifyCodeRoute
   '/blog': typeof BlogIndexRoute
+  '/courses': typeof CoursesIndexRoute
   '/learn': typeof LearnIndexRoute
   '/lessons': typeof LessonsIndexRoute
   '/paths': typeof PathsIndexRoute
@@ -442,14 +475,18 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/_authenticated/certificates': typeof AuthenticatedCertificatesRoute
   '/_authenticated/console': typeof AuthenticatedConsoleRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/studio': typeof AuthenticatedStudioRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/courses/$slug': typeof CoursesSlugRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/verify/$code': typeof VerifyCodeRoute
   '/blog/': typeof BlogIndexRoute
+  '/courses/': typeof CoursesIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
@@ -494,14 +531,18 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/certificates'
     | '/console'
     | '/dashboard'
     | '/studio'
     | '/blog/$slug'
+    | '/courses/$slug'
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/verify/$code'
     | '/blog/'
+    | '/courses/'
     | '/learn/'
     | '/lessons/'
     | '/paths/'
@@ -544,13 +585,17 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/certificates'
     | '/dashboard'
     | '/studio'
     | '/blog/$slug'
+    | '/courses/$slug'
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/verify/$code'
     | '/blog'
+    | '/courses'
     | '/learn'
     | '/lessons'
     | '/paths'
@@ -594,14 +639,18 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/_authenticated/certificates'
     | '/_authenticated/console'
     | '/_authenticated/dashboard'
     | '/_authenticated/studio'
     | '/blog/$slug'
+    | '/courses/$slug'
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/verify/$code'
     | '/blog/'
+    | '/courses/'
     | '/learn/'
     | '/lessons/'
     | '/paths/'
@@ -647,10 +696,13 @@ export interface RootRouteChildren {
   QuizRoute: typeof QuizRoute
   ToolsRoute: typeof ToolsRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  CoursesSlugRoute: typeof CoursesSlugRoute
   LearnSlugRoute: typeof LearnSlugRoute
   LessonsIdRoute: typeof LessonsIdRoute
   PathsSlugRoute: typeof PathsSlugRoute
+  VerifyCodeRoute: typeof VerifyCodeRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  CoursesIndexRoute: typeof CoursesIndexRoute
   LearnIndexRoute: typeof LearnIndexRoute
   LessonsIndexRoute: typeof LessonsIndexRoute
   PathsIndexRoute: typeof PathsIndexRoute
@@ -763,11 +815,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/courses/': {
+      id: '/courses/'
+      path: '/courses'
+      fullPath: '/courses/'
+      preLoaderRoute: typeof CoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify/$code': {
+      id: '/verify/$code'
+      path: '/verify/$code'
+      fullPath: '/verify/$code'
+      preLoaderRoute: typeof VerifyCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/paths/$slug': {
@@ -789,6 +855,13 @@ declare module '@tanstack/react-router' {
       path: '/learn/$slug'
       fullPath: '/learn/$slug'
       preLoaderRoute: typeof LearnSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/$slug': {
+      id: '/courses/$slug'
+      path: '/courses/$slug'
+      fullPath: '/courses/$slug'
+      preLoaderRoute: typeof CoursesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -817,6 +890,13 @@ declare module '@tanstack/react-router' {
       path: '/console'
       fullPath: '/console'
       preLoaderRoute: typeof AuthenticatedConsoleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/certificates': {
+      id: '/_authenticated/certificates'
+      path: '/certificates'
+      fullPath: '/certificates'
+      preLoaderRoute: typeof AuthenticatedCertificatesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/console/': {
@@ -1067,12 +1147,14 @@ const AuthenticatedConsoleRouteWithChildren =
   AuthenticatedConsoleRoute._addFileChildren(AuthenticatedConsoleRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCertificatesRoute: typeof AuthenticatedCertificatesRoute
   AuthenticatedConsoleRoute: typeof AuthenticatedConsoleRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedStudioRoute: typeof AuthenticatedStudioRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCertificatesRoute: AuthenticatedCertificatesRoute,
   AuthenticatedConsoleRoute: AuthenticatedConsoleRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedStudioRoute: AuthenticatedStudioRoute,
@@ -1095,10 +1177,13 @@ const rootRouteChildren: RootRouteChildren = {
   QuizRoute: QuizRoute,
   ToolsRoute: ToolsRoute,
   BlogSlugRoute: BlogSlugRoute,
+  CoursesSlugRoute: CoursesSlugRoute,
   LearnSlugRoute: LearnSlugRoute,
   LessonsIdRoute: LessonsIdRoute,
   PathsSlugRoute: PathsSlugRoute,
+  VerifyCodeRoute: VerifyCodeRoute,
   BlogIndexRoute: BlogIndexRoute,
+  CoursesIndexRoute: CoursesIndexRoute,
   LearnIndexRoute: LearnIndexRoute,
   LessonsIndexRoute: LessonsIndexRoute,
   PathsIndexRoute: PathsIndexRoute,
