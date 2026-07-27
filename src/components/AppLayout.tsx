@@ -3,7 +3,7 @@ import { Toaster } from "sonner";
 import {
   Home, Target, Route as RouteIcon, BookOpen, Sparkles, Rocket, GraduationCap,
   ListChecks, Trophy, Wrench, User as UserIcon, Crown, Flame, Bell, Search, Shield,
-  LayoutDashboard, LogIn, LogOut, Newspaper,
+  LayoutDashboard, LogIn, LogOut, Newspaper, Library, Award,
 } from "lucide-react";
 import { useUser } from "@/hooks/use-user";
 import { useAuth } from "@/hooks/use-auth";
