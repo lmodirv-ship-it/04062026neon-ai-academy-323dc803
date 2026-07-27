@@ -1,8 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Crown, Download, Github, Shield } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Crown, Download, Eye, Github, Shield } from "lucide-react";
+import { getPublicStats } from "@/lib/api/analytics.functions";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const { data: stats } = useQuery({ queryKey: ["public-stats"], queryFn: () => getPublicStats(), staleTime: 60_000 });
+
   return (
     <footer className="mt-12 border-t border-border/40 glass-strong">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 grid gap-6 md:grid-cols-3 text-sm">
