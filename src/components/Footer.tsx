@@ -1,8 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Crown, Download, Github, Shield } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Crown, Download, Eye, Github, Shield } from "lucide-react";
+import { getPublicStats } from "@/lib/api/analytics.functions";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const { data: stats } = useQuery({ queryKey: ["public-stats"], queryFn: () => getPublicStats(), staleTime: 60_000 });
+
   return (
     <footer className="mt-12 border-t border-border/40 glass-strong">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 grid gap-6 md:grid-cols-3 text-sm">
@@ -25,7 +29,15 @@ export function Footer() {
             <li><Link to="/paths" className="hover:text-neon-cyan">Learning Paths</Link></li>
             <li><Link to="/playground" className="hover:text-neon-cyan">AI Playground</Link></li>
             <li><Link to="/projects" className="hover:text-neon-cyan">Mini Projects</Link></li>
+            <li><Link to="/blog" className="hover:text-neon-cyan">Blog</Link></li>
           </ul>
+          {stats && (
+            <div className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Eye className="size-3.5 text-neon-cyan" />
+              {stats.totalViews.toLocaleString()} زيارة · {stats.today.visitors.toLocaleString()} زائر اليوم
+            </div>
+          )}
+
         </div>
 
         <div>

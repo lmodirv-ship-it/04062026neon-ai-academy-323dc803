@@ -24,11 +24,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PathsIndexRouteImport } from './routes/paths/index'
 import { Route as LessonsIndexRouteImport } from './routes/lessons/index'
 import { Route as LearnIndexRouteImport } from './routes/learn/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as PathsSlugRouteImport } from './routes/paths/$slug'
 import { Route as LessonsIdRouteImport } from './routes/lessons/$id'
 import { Route as LearnSlugRouteImport } from './routes/learn/$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as AuthenticatedStudioRouteImport } from './routes/_authenticated/studio'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedConsoleRouteImport } from './routes/_authenticated/console'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
@@ -104,6 +107,11 @@ const LearnIndexRoute = LearnIndexRouteImport.update({
   path: '/learn/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PathsSlugRoute = PathsSlugRouteImport.update({
   id: '/paths/$slug',
   path: '/paths/$slug',
@@ -119,6 +127,11 @@ const LearnSlugRoute = LearnSlugRouteImport.update({
   path: '/learn/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedStudioRoute = AuthenticatedStudioRouteImport.update({
   id: '/studio',
   path: '/studio',
@@ -127,6 +140,11 @@ const AuthenticatedStudioRoute = AuthenticatedStudioRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedConsoleRoute = AuthenticatedConsoleRouteImport.update({
+  id: '/console',
+  path: '/console',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
@@ -142,11 +160,14 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/console': typeof AuthenticatedConsoleRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/studio': typeof AuthenticatedStudioRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
@@ -163,11 +184,14 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/console': typeof AuthenticatedConsoleRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/studio': typeof AuthenticatedStudioRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/learn': typeof LearnIndexRoute
   '/lessons': typeof LessonsIndexRoute
   '/paths': typeof PathsIndexRoute
@@ -186,11 +210,14 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/tools': typeof ToolsRoute
+  '/_authenticated/console': typeof AuthenticatedConsoleRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/studio': typeof AuthenticatedStudioRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/lessons/$id': typeof LessonsIdRoute
   '/paths/$slug': typeof PathsSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/lessons/': typeof LessonsIndexRoute
   '/paths/': typeof PathsIndexRoute
@@ -209,11 +236,14 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/console'
     | '/dashboard'
     | '/studio'
+    | '/blog/$slug'
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/blog/'
     | '/learn/'
     | '/lessons/'
     | '/paths/'
@@ -230,11 +260,14 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/console'
     | '/dashboard'
     | '/studio'
+    | '/blog/$slug'
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/blog'
     | '/learn'
     | '/lessons'
     | '/paths'
@@ -252,11 +285,14 @@ export interface FileRouteTypes {
     | '/projects'
     | '/quiz'
     | '/tools'
+    | '/_authenticated/console'
     | '/_authenticated/dashboard'
     | '/_authenticated/studio'
+    | '/blog/$slug'
     | '/learn/$slug'
     | '/lessons/$id'
     | '/paths/$slug'
+    | '/blog/'
     | '/learn/'
     | '/lessons/'
     | '/paths/'
@@ -275,9 +311,11 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   QuizRoute: typeof QuizRoute
   ToolsRoute: typeof ToolsRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   LearnSlugRoute: typeof LearnSlugRoute
   LessonsIdRoute: typeof LessonsIdRoute
   PathsSlugRoute: typeof PathsSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   LearnIndexRoute: typeof LearnIndexRoute
   LessonsIndexRoute: typeof LessonsIndexRoute
   PathsIndexRoute: typeof PathsIndexRoute
@@ -390,6 +428,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/paths/$slug': {
       id: '/paths/$slug'
       path: '/paths/$slug'
@@ -411,6 +456,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/studio': {
       id: '/_authenticated/studio'
       path: '/studio'
@@ -425,15 +477,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/console': {
+      id: '/_authenticated/console'
+      path: '/console'
+      fullPath: '/console'
+      preLoaderRoute: typeof AuthenticatedConsoleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedConsoleRoute: typeof AuthenticatedConsoleRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedStudioRoute: typeof AuthenticatedStudioRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedConsoleRoute: AuthenticatedConsoleRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedStudioRoute: AuthenticatedStudioRoute,
 }
@@ -454,9 +515,11 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   QuizRoute: QuizRoute,
   ToolsRoute: ToolsRoute,
+  BlogSlugRoute: BlogSlugRoute,
   LearnSlugRoute: LearnSlugRoute,
   LessonsIdRoute: LessonsIdRoute,
   PathsSlugRoute: PathsSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   LearnIndexRoute: LearnIndexRoute,
   LessonsIndexRoute: LessonsIndexRoute,
   PathsIndexRoute: PathsIndexRoute,
