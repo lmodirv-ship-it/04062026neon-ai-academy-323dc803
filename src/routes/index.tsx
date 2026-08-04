@@ -87,6 +87,8 @@ function Home() {
                 <span className="inline-flex items-center gap-2"><span className="size-1.5 rounded-full bg-neon-cyan pulse-dot text-neon-cyan" /> 12,840 learners online</span>
                 <span className="inline-flex items-center gap-2"><Flame className="size-3 text-neon-orange fire" /> {user.streak}-day streak</span>
                 <span className="inline-flex items-center gap-2"><Star className="size-3 text-neon-orange" /> {user.stars} stars</span>
+                <span className="inline-flex items-center gap-2"><Eye className="size-3 text-neon-cyan" /> {(visits?.totalViews ?? 0).toLocaleString()} مشاهدة</span>
+                <span className="inline-flex items-center gap-2"><Users className="size-3 text-neon-purple" /> {(visits?.totalVisitors ?? 0).toLocaleString()} زائر</span>
               </div>
             </div>
 
