@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Sparkles, Play, Crown, Flame, Star, Trophy, BookOpen, Rocket, ListChecks, TrendingUp, ChevronRight, Zap, Quote } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Sparkles, Play, Crown, Flame, Star, Trophy, BookOpen, Rocket, ListChecks, TrendingUp, ChevronRight, Zap, Quote, Newspaper, Eye, Users } from "lucide-react";
 import logoImg from "@/assets/hn-ai-logo.jpg";
 import { learningPaths, aiQuotes, trendingTools, missions } from "@/lib/data/mockData";
+import { getPublicStats } from "@/lib/api/analytics.functions";
 import { PathCard } from "@/components/PathCard";
 import { StatTile } from "@/components/StatTile";
 import { Particles } from "@/components/Particles";
@@ -26,6 +28,7 @@ function Home() {
   const lvl = getLevelInfo(user.xp);
   const todayMission = missions[(new Date().getDate() - 1) % missions.length];
   const quote = aiQuotes[new Date().getDate() % aiQuotes.length];
+  const { data: visits } = useQuery({ queryKey: ["public-stats"], queryFn: () => getPublicStats(), staleTime: 60_000 });
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-[1fr_340px] gap-6">
@@ -73,6 +76,9 @@ function Home() {
                 </Link>
                 <Link to="/paths" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass border-neon-cyan/30 font-semibold hover:border-neon-cyan hover:glow-cyan transition">
                   <Play className="size-4 text-neon-cyan" /> Continue Learning
+                </Link>
+                <Link to="/blog" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass border-neon-orange/40 font-semibold text-neon-orange hover:border-neon-orange hover:glow-orange transition">
+                  <Newspaper className="size-4" /> المدونة
                 </Link>
               </div>
 
