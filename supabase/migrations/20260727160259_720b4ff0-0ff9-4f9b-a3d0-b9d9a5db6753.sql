@@ -1,4 +1,0 @@
-GRANT SELECT ON public.programs, public.levels, public.courses, public.chapters, public.units, public.lessons, public.lesson_blocks, public.questions, public.question_options TO anon, authenticated;
-GRANT INSERT, UPDATE, DELETE ON public.programs, public.levels, public.courses, public.chapters, public.units, public.lessons, public.lesson_blocks, public.questions, public.question_options TO authenticated;
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.lesson_progress, public.question_attempts TO authenticated;
-GRANT ALL ON public.programs, public.levels, public.courses, public.chapters, public.units, public.lessons, public.lesson_blocks, public.questions, public.question_options, public.lesson_progress, public.question_attempts TO service_role;
