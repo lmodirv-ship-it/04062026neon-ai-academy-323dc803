@@ -57,8 +57,8 @@ export function Footer() {
       <div className="border-t border-border/40 px-4 sm:px-6 lg:px-8 py-4 text-center text-xs text-muted-foreground"
         style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom))" }}>
         <span dir="rtl" className="block">
-          © {year} <span className="text-gold font-semibold">HN-Group</span> — جميع الحقوق محفوظة
-          <span className="text-gold"> مولاي إسماعيل الحسني</span>
+          جميع الحقوق محفوظة لمجموعة <span className="text-gold font-semibold">أشن</span> — من تصميم
+          <span className="text-gold"> مولاي إسماعيل الحسني</span> {year >= 2026 ? 2026 : year}
         </span>
         <span className="block opacity-70 mt-1">All rights reserved · Built with ♥ for the AI generation</span>
       </div>

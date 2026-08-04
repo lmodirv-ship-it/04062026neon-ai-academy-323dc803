@@ -27,12 +27,16 @@ export const trackView = createServerFn({ method: "POST" })
 /** Public totals shown in the footer. */
 export const getPublicStats = createServerFn({ method: "GET" }).handler(async () => {
   const db = publicClient();
-  const { data } = await db.from("daily_stats").select("day, views, visitors").order("day", { ascending: false }).limit(30);
+  const [{ data }, allTime] = await Promise.all([
+    db.from("daily_stats").select("day, views, visitors").order("day", { ascending: false }).limit(30),
+    db.from("daily_stats").select("views, visitors"),
+  ]);
   const rows = data ?? [];
+  const all = allTime.data ?? [];
   return {
     today: rows[0] ?? { day: new Date().toISOString().slice(0, 10), views: 0, visitors: 0 },
-    totalViews: rows.reduce((s, r) => s + r.views, 0),
-    totalVisitors: rows.reduce((s, r) => s + r.visitors, 0),
+    totalViews: all.reduce((s, r) => s + r.views, 0),
+    totalVisitors: all.reduce((s, r) => s + r.visitors, 0),
     series: [...rows].reverse(),
   };
 });

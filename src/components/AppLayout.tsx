@@ -52,7 +52,7 @@ const bottom = [
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const user = useUser();
-  const { isEditor, role } = useAuth();
+  const { isEditor, isAdmin } = useAuth();
   const lvl = getLevelInfo(user.xp);
 
   return (
@@ -74,7 +74,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             <SideLink key={item.to} {...item} />
           ))}
           {isEditor && editorNav.map((item) => <SideLink key={item.to} {...item} />)}
-          {role === "admin" && adminNav.map((item) => <SideLink key={item.to} {...item} />)}
+          {isAdmin && adminNav.map((item) => <SideLink key={item.to} {...item} />)}
         </nav>
 
         <div className="mt-2 p-4 rounded-2xl border border-neon-orange/40 bg-gradient-to-br from-neon-orange/10 to-transparent text-center">

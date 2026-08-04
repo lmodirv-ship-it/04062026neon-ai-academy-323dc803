@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Sparkles, Play, Crown, Flame, Star, Trophy, BookOpen, Rocket, ListChecks, TrendingUp, ChevronRight, Zap, Quote } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Sparkles, Play, Crown, Flame, Star, Trophy, BookOpen, Rocket, ListChecks, TrendingUp, ChevronRight, Zap, Quote, Newspaper, Eye, Users } from "lucide-react";
 import logoImg from "@/assets/hn-ai-logo.jpg";
 import { learningPaths, aiQuotes, trendingTools, missions } from "@/lib/data/mockData";
+import { getPublicStats } from "@/lib/api/analytics.functions";
 import { PathCard } from "@/components/PathCard";
 import { StatTile } from "@/components/StatTile";
 import { Particles } from "@/components/Particles";
@@ -26,6 +28,7 @@ function Home() {
   const lvl = getLevelInfo(user.xp);
   const todayMission = missions[(new Date().getDate() - 1) % missions.length];
   const quote = aiQuotes[new Date().getDate() % aiQuotes.length];
+  const { data: visits } = useQuery({ queryKey: ["public-stats"], queryFn: () => getPublicStats(), staleTime: 60_000 });
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-[1fr_340px] gap-6">
@@ -74,6 +77,9 @@ function Home() {
                 <Link to="/paths" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass border-neon-cyan/30 font-semibold hover:border-neon-cyan hover:glow-cyan transition">
                   <Play className="size-4 text-neon-cyan" /> Continue Learning
                 </Link>
+                <Link to="/blog" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass border-neon-orange/40 font-semibold text-neon-orange hover:border-neon-orange hover:glow-orange transition">
+                  <Newspaper className="size-4" /> المدونة
+                </Link>
               </div>
 
               {/* mini live status bar */}
@@ -81,6 +87,8 @@ function Home() {
                 <span className="inline-flex items-center gap-2"><span className="size-1.5 rounded-full bg-neon-cyan pulse-dot text-neon-cyan" /> 12,840 learners online</span>
                 <span className="inline-flex items-center gap-2"><Flame className="size-3 text-neon-orange fire" /> {user.streak}-day streak</span>
                 <span className="inline-flex items-center gap-2"><Star className="size-3 text-neon-orange" /> {user.stars} stars</span>
+                <span className="inline-flex items-center gap-2"><Eye className="size-3 text-neon-cyan" /> {(visits?.totalViews ?? 0).toLocaleString()} مشاهدة</span>
+                <span className="inline-flex items-center gap-2"><Users className="size-3 text-neon-purple" /> {(visits?.totalVisitors ?? 0).toLocaleString()} زائر</span>
               </div>
             </div>
 

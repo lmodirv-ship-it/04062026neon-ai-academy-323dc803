@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { Newspaper, Search, Tag } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import { Newspaper, Search, Tag, ChevronLeft, ChevronRight } from "lucide-react";
 import { listPosts } from "@/lib/api/blog.functions";
+
+const PAGE_SIZE = 20;
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -22,12 +24,22 @@ function BlogIndex() {
   const { data, isLoading } = useQuery({ queryKey: ["blog-list"], queryFn: () => listPosts() });
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
 
-  const posts = (data?.posts ?? []).filter(
-    (p) =>
-      (!cat || p.category_id === cat) &&
-      (q.trim() === "" || (p.title + " " + (p.excerpt ?? "")).toLowerCase().includes(q.toLowerCase())),
+  const filtered = useMemo(
+    () =>
+      (data?.posts ?? []).filter(
+        (p) =>
+          (!cat || p.category_id === cat) &&
+          (q.trim() === "" || (p.title + " " + (p.excerpt ?? "")).toLowerCase().includes(q.toLowerCase())),
+      ),
+    [data?.posts, cat, q],
   );
+
+  useEffect(() => { setPage(1); }, [q, cat]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const posts = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto" dir="rtl">
@@ -70,6 +82,34 @@ function BlogIndex() {
           </Link>
         ))}
       </div>
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 pt-2">
+          <button
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page === 1}
+            className="px-3 py-2 rounded-xl glass text-sm inline-flex items-center gap-1 disabled:opacity-40"
+          >
+            <ChevronRight className="size-4" /> السابق
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+            <button
+              key={n}
+              onClick={() => setPage(n)}
+              className={`size-9 rounded-xl glass text-sm ${n === page ? "border-neon-purple text-neon-purple font-bold" : ""}`}
+            >
+              {n}
+            </button>
+          ))}
+          <button
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page === totalPages}
+            className="px-3 py-2 rounded-xl glass text-sm inline-flex items-center gap-1 disabled:opacity-40"
+          >
+            التالي <ChevronLeft className="size-4" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
