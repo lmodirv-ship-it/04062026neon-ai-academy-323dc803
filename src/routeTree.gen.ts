@@ -9,122 +9,68 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as ChatRouteImport } from './routes/chat'
-import { Route as CommunityRouteImport } from './routes/community'
-import { Route as DownloadRouteImport } from './routes/download'
-import { Route as LeaderboardRouteImport } from './routes/leaderboard'
-import { Route as MissionsRouteImport } from './routes/missions'
-import { Route as PlaygroundRouteImport } from './routes/playground'
-import { Route as ProfileRouteImport } from './routes/profile'
-import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as ToolsRouteImport } from './routes/tools'
-import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
-import { Route as AuthenticatedCertificatesRouteImport } from './routes/_authenticated/certificates'
-import { Route as AuthenticatedConsoleRouteImport } from './routes/_authenticated/console'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedStatsRouteImport } from './routes/_authenticated/stats'
-import { Route as AuthenticatedStudioRouteImport } from './routes/_authenticated/studio'
-import { Route as BlogIndexRouteImport } from './routes/blog/index'
-import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
-import { Route as CoursesIndexRouteImport } from './routes/courses/index'
-import { Route as CoursesSlugRouteImport } from './routes/courses/$slug'
-import { Route as LearnIndexRouteImport } from './routes/learn/index'
-import { Route as LearnSlugRouteImport } from './routes/learn/$slug'
-import { Route as LessonsIndexRouteImport } from './routes/lessons/index'
-import { Route as LessonsIdRouteImport } from './routes/lessons/$id'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PlaygroundRouteImport } from './routes/playground'
+import { Route as MissionsRouteImport } from './routes/missions'
+import { Route as LeaderboardRouteImport } from './routes/leaderboard'
+import { Route as DownloadRouteImport } from './routes/download'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as ChatRouteImport } from './routes/chat'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as PathsIndexRouteImport } from './routes/paths/index'
-import { Route as PathsSlugRouteImport } from './routes/paths/$slug'
+import { Route as LessonsIndexRouteImport } from './routes/lessons/index'
+import { Route as LearnIndexRouteImport } from './routes/learn/index'
+import { Route as CoursesIndexRouteImport } from './routes/courses/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as VerifyCodeRouteImport } from './routes/verify/$code'
+import { Route as PathsSlugRouteImport } from './routes/paths/$slug'
+import { Route as LessonsIdRouteImport } from './routes/lessons/$id'
+import { Route as LearnSlugRouteImport } from './routes/learn/$slug'
+import { Route as CoursesSlugRouteImport } from './routes/courses/$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as AuthenticatedStudioRouteImport } from './routes/_authenticated/studio'
+import { Route as AuthenticatedStatsRouteImport } from './routes/_authenticated/stats'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedConsoleRouteImport } from './routes/_authenticated/console'
+import { Route as AuthenticatedCertificatesRouteImport } from './routes/_authenticated/certificates'
+import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as AuthenticatedConsoleIndexRouteImport } from './routes/_authenticated/console/index'
-import { Route as AuthenticatedConsoleAccountRouteImport } from './routes/_authenticated/console/account'
-import { Route as AuthenticatedConsoleApiRouteImport } from './routes/_authenticated/console/api'
-import { Route as AuthenticatedConsoleBlogRouteImport } from './routes/_authenticated/console/blog'
-import { Route as AuthenticatedConsoleCertificatesRouteImport } from './routes/_authenticated/console/certificates'
-import { Route as AuthenticatedConsoleCouponsRouteImport } from './routes/_authenticated/console/coupons'
-import { Route as AuthenticatedConsoleCoursesRouteImport } from './routes/_authenticated/console/courses'
-import { Route as AuthenticatedConsoleFinancialRouteImport } from './routes/_authenticated/console/financial'
-import { Route as AuthenticatedConsoleForumRouteImport } from './routes/_authenticated/console/forum'
-import { Route as AuthenticatedConsoleGeneratorRouteImport } from './routes/_authenticated/console/generator'
-import { Route as AuthenticatedConsoleInstructorsRouteImport } from './routes/_authenticated/console/instructors'
-import { Route as AuthenticatedConsoleLearningRouteImport } from './routes/_authenticated/console/learning'
-import { Route as AuthenticatedConsoleLessonsRouteImport } from './routes/_authenticated/console/lessons'
-import { Route as AuthenticatedConsoleLogsRouteImport } from './routes/_authenticated/console/logs'
-import { Route as AuthenticatedConsoleNotificationsRouteImport } from './routes/_authenticated/console/notifications'
-import { Route as AuthenticatedConsolePlansRouteImport } from './routes/_authenticated/console/plans'
-import { Route as AuthenticatedConsolePlaygroundRouteImport } from './routes/_authenticated/console/playground'
-import { Route as AuthenticatedConsoleProfileRouteImport } from './routes/_authenticated/console/profile'
-import { Route as AuthenticatedConsoleQuizzesRouteImport } from './routes/_authenticated/console/quizzes'
-import { Route as AuthenticatedConsoleRealtimeRouteImport } from './routes/_authenticated/console/realtime'
-import { Route as AuthenticatedConsoleReposRouteImport } from './routes/_authenticated/console/repos'
-import { Route as AuthenticatedConsoleSecurityRouteImport } from './routes/_authenticated/console/security'
-import { Route as AuthenticatedConsoleSettingsRouteImport } from './routes/_authenticated/console/settings'
-import { Route as AuthenticatedConsoleStudentsRouteImport } from './routes/_authenticated/console/students'
-import { Route as AuthenticatedConsoleSupportRouteImport } from './routes/_authenticated/console/support'
-import { Route as AuthenticatedConsoleTrafficRouteImport } from './routes/_authenticated/console/traffic'
 import { Route as AuthenticatedConsoleTransactionsRouteImport } from './routes/_authenticated/console/transactions'
+import { Route as AuthenticatedConsoleTrafficRouteImport } from './routes/_authenticated/console/traffic'
+import { Route as AuthenticatedConsoleSupportRouteImport } from './routes/_authenticated/console/support'
+import { Route as AuthenticatedConsoleStudentsRouteImport } from './routes/_authenticated/console/students'
+import { Route as AuthenticatedConsoleSettingsRouteImport } from './routes/_authenticated/console/settings'
+import { Route as AuthenticatedConsoleSecurityRouteImport } from './routes/_authenticated/console/security'
+import { Route as AuthenticatedConsoleReposRouteImport } from './routes/_authenticated/console/repos'
+import { Route as AuthenticatedConsoleRealtimeRouteImport } from './routes/_authenticated/console/realtime'
+import { Route as AuthenticatedConsoleQuizzesRouteImport } from './routes/_authenticated/console/quizzes'
+import { Route as AuthenticatedConsoleProfileRouteImport } from './routes/_authenticated/console/profile'
+import { Route as AuthenticatedConsolePlaygroundRouteImport } from './routes/_authenticated/console/playground'
+import { Route as AuthenticatedConsolePlansRouteImport } from './routes/_authenticated/console/plans'
+import { Route as AuthenticatedConsoleNotificationsRouteImport } from './routes/_authenticated/console/notifications'
+import { Route as AuthenticatedConsoleLogsRouteImport } from './routes/_authenticated/console/logs'
+import { Route as AuthenticatedConsoleLessonsRouteImport } from './routes/_authenticated/console/lessons'
+import { Route as AuthenticatedConsoleLearningRouteImport } from './routes/_authenticated/console/learning'
+import { Route as AuthenticatedConsoleInstructorsRouteImport } from './routes/_authenticated/console/instructors'
+import { Route as AuthenticatedConsoleGeneratorRouteImport } from './routes/_authenticated/console/generator'
+import { Route as AuthenticatedConsoleForumRouteImport } from './routes/_authenticated/console/forum'
+import { Route as AuthenticatedConsoleFinancialRouteImport } from './routes/_authenticated/console/financial'
+import { Route as AuthenticatedConsoleCoursesRouteImport } from './routes/_authenticated/console/courses'
+import { Route as AuthenticatedConsoleCouponsRouteImport } from './routes/_authenticated/console/coupons'
+import { Route as AuthenticatedConsoleCertificatesRouteImport } from './routes/_authenticated/console/certificates'
+import { Route as AuthenticatedConsoleBlogRouteImport } from './routes/_authenticated/console/blog'
+import { Route as AuthenticatedConsoleApiRouteImport } from './routes/_authenticated/console/api'
+import { Route as AuthenticatedConsoleAccountRouteImport } from './routes/_authenticated/console/account'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChatRoute = ChatRouteImport.update({
-  id: '/chat',
-  path: '/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CommunityRoute = CommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DownloadRoute = DownloadRouteImport.update({
-  id: '/download',
-  path: '/download',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LeaderboardRoute = LeaderboardRouteImport.update({
-  id: '/leaderboard',
-  path: '/leaderboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MissionsRoute = MissionsRouteImport.update({
-  id: '/missions',
-  path: '/missions',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlaygroundRoute = PlaygroundRouteImport.update({
-  id: '/playground',
-  path: '/playground',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProfileRoute = ProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjectsRoute = ProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QuizRoute = QuizRouteImport.update({
@@ -132,81 +78,63 @@ const QuizRoute = QuizRouteImport.update({
   path: '/quiz',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ToolsRoute = ToolsRouteImport.update({
-  id: '/tools',
-  path: '/tools',
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAchievementsRoute =
-  AuthenticatedAchievementsRouteImport.update({
-    id: '/achievements',
-    path: '/achievements',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedCertificatesRoute =
-  AuthenticatedCertificatesRouteImport.update({
-    id: '/certificates',
-    path: '/certificates',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedConsoleRoute = AuthenticatedConsoleRouteImport.update({
-  id: '/console',
-  path: '/console',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedStatsRoute = AuthenticatedStatsRouteImport.update({
-  id: '/stats',
-  path: '/stats',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedStudioRoute = AuthenticatedStudioRouteImport.update({
-  id: '/studio',
-  path: '/studio',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const BlogIndexRoute = BlogIndexRouteImport.update({
-  id: '/blog/',
-  path: '/blog/',
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/blog/$slug',
-  path: '/blog/$slug',
+const PlaygroundRoute = PlaygroundRouteImport.update({
+  id: '/playground',
+  path: '/playground',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CoursesIndexRoute = CoursesIndexRouteImport.update({
-  id: '/courses/',
-  path: '/courses/',
+const MissionsRoute = MissionsRouteImport.update({
+  id: '/missions',
+  path: '/missions',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CoursesSlugRoute = CoursesSlugRouteImport.update({
-  id: '/courses/$slug',
-  path: '/courses/$slug',
+const LeaderboardRoute = LeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LearnIndexRoute = LearnIndexRouteImport.update({
-  id: '/learn/',
-  path: '/learn/',
+const DownloadRoute = DownloadRouteImport.update({
+  id: '/download',
+  path: '/download',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LearnSlugRoute = LearnSlugRouteImport.update({
-  id: '/learn/$slug',
-  path: '/learn/$slug',
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LessonsIndexRoute = LessonsIndexRouteImport.update({
-  id: '/lessons/',
-  path: '/lessons/',
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LessonsIdRoute = LessonsIdRouteImport.update({
-  id: '/lessons/$id',
-  path: '/lessons/$id',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PathsIndexRoute = PathsIndexRouteImport.update({
@@ -214,9 +142,24 @@ const PathsIndexRoute = PathsIndexRouteImport.update({
   path: '/paths/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PathsSlugRoute = PathsSlugRouteImport.update({
-  id: '/paths/$slug',
-  path: '/paths/$slug',
+const LessonsIndexRoute = LessonsIndexRouteImport.update({
+  id: '/lessons/',
+  path: '/lessons/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearnIndexRoute = LearnIndexRouteImport.update({
+  id: '/learn/',
+  path: '/learn/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesIndexRoute = CoursesIndexRouteImport.update({
+  id: '/courses/',
+  path: '/courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerifyCodeRoute = VerifyCodeRouteImport.update({
@@ -224,153 +167,73 @@ const VerifyCodeRoute = VerifyCodeRouteImport.update({
   path: '/verify/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PathsSlugRoute = PathsSlugRouteImport.update({
+  id: '/paths/$slug',
+  path: '/paths/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LessonsIdRoute = LessonsIdRouteImport.update({
+  id: '/lessons/$id',
+  path: '/lessons/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearnSlugRoute = LearnSlugRouteImport.update({
+  id: '/learn/$slug',
+  path: '/learn/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesSlugRoute = CoursesSlugRouteImport.update({
+  id: '/courses/$slug',
+  path: '/courses/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedStudioRoute = AuthenticatedStudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStatsRoute = AuthenticatedStatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedConsoleRoute = AuthenticatedConsoleRouteImport.update({
+  id: '/console',
+  path: '/console',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCertificatesRoute =
+  AuthenticatedCertificatesRouteImport.update({
+    id: '/certificates',
+    path: '/certificates',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAchievementsRoute =
+  AuthenticatedAchievementsRouteImport.update({
+    id: '/achievements',
+    path: '/achievements',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedConsoleIndexRoute =
   AuthenticatedConsoleIndexRouteImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => AuthenticatedConsoleRoute,
   } as any)
-const AuthenticatedConsoleAccountRoute =
-  AuthenticatedConsoleAccountRouteImport.update({
-    id: '/account',
-    path: '/account',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleApiRoute = AuthenticatedConsoleApiRouteImport.update({
-  id: '/api',
-  path: '/api',
-  getParentRoute: () => AuthenticatedConsoleRoute,
-} as any)
-const AuthenticatedConsoleBlogRoute =
-  AuthenticatedConsoleBlogRouteImport.update({
-    id: '/blog',
-    path: '/blog',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleCertificatesRoute =
-  AuthenticatedConsoleCertificatesRouteImport.update({
-    id: '/certificates',
-    path: '/certificates',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleCouponsRoute =
-  AuthenticatedConsoleCouponsRouteImport.update({
-    id: '/coupons',
-    path: '/coupons',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleCoursesRoute =
-  AuthenticatedConsoleCoursesRouteImport.update({
-    id: '/courses',
-    path: '/courses',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleFinancialRoute =
-  AuthenticatedConsoleFinancialRouteImport.update({
-    id: '/financial',
-    path: '/financial',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleForumRoute =
-  AuthenticatedConsoleForumRouteImport.update({
-    id: '/forum',
-    path: '/forum',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleGeneratorRoute =
-  AuthenticatedConsoleGeneratorRouteImport.update({
-    id: '/generator',
-    path: '/generator',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleInstructorsRoute =
-  AuthenticatedConsoleInstructorsRouteImport.update({
-    id: '/instructors',
-    path: '/instructors',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleLearningRoute =
-  AuthenticatedConsoleLearningRouteImport.update({
-    id: '/learning',
-    path: '/learning',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleLessonsRoute =
-  AuthenticatedConsoleLessonsRouteImport.update({
-    id: '/lessons',
-    path: '/lessons',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleLogsRoute =
-  AuthenticatedConsoleLogsRouteImport.update({
-    id: '/logs',
-    path: '/logs',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleNotificationsRoute =
-  AuthenticatedConsoleNotificationsRouteImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsolePlansRoute =
-  AuthenticatedConsolePlansRouteImport.update({
-    id: '/plans',
-    path: '/plans',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsolePlaygroundRoute =
-  AuthenticatedConsolePlaygroundRouteImport.update({
-    id: '/playground',
-    path: '/playground',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleProfileRoute =
-  AuthenticatedConsoleProfileRouteImport.update({
-    id: '/profile',
-    path: '/profile',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleQuizzesRoute =
-  AuthenticatedConsoleQuizzesRouteImport.update({
-    id: '/quizzes',
-    path: '/quizzes',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleRealtimeRoute =
-  AuthenticatedConsoleRealtimeRouteImport.update({
-    id: '/realtime',
-    path: '/realtime',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleReposRoute =
-  AuthenticatedConsoleReposRouteImport.update({
-    id: '/repos',
-    path: '/repos',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleSecurityRoute =
-  AuthenticatedConsoleSecurityRouteImport.update({
-    id: '/security',
-    path: '/security',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleSettingsRoute =
-  AuthenticatedConsoleSettingsRouteImport.update({
-    id: '/settings',
-    path: '/settings',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleStudentsRoute =
-  AuthenticatedConsoleStudentsRouteImport.update({
-    id: '/students',
-    path: '/students',
-    getParentRoute: () => AuthenticatedConsoleRoute,
-  } as any)
-const AuthenticatedConsoleSupportRoute =
-  AuthenticatedConsoleSupportRouteImport.update({
-    id: '/support',
-    path: '/support',
+const AuthenticatedConsoleTransactionsRoute =
+  AuthenticatedConsoleTransactionsRouteImport.update({
+    id: '/transactions',
+    path: '/transactions',
     getParentRoute: () => AuthenticatedConsoleRoute,
   } as any)
 const AuthenticatedConsoleTrafficRoute =
@@ -379,10 +242,147 @@ const AuthenticatedConsoleTrafficRoute =
     path: '/traffic',
     getParentRoute: () => AuthenticatedConsoleRoute,
   } as any)
-const AuthenticatedConsoleTransactionsRoute =
-  AuthenticatedConsoleTransactionsRouteImport.update({
-    id: '/transactions',
-    path: '/transactions',
+const AuthenticatedConsoleSupportRoute =
+  AuthenticatedConsoleSupportRouteImport.update({
+    id: '/support',
+    path: '/support',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleStudentsRoute =
+  AuthenticatedConsoleStudentsRouteImport.update({
+    id: '/students',
+    path: '/students',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleSettingsRoute =
+  AuthenticatedConsoleSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleSecurityRoute =
+  AuthenticatedConsoleSecurityRouteImport.update({
+    id: '/security',
+    path: '/security',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleReposRoute =
+  AuthenticatedConsoleReposRouteImport.update({
+    id: '/repos',
+    path: '/repos',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleRealtimeRoute =
+  AuthenticatedConsoleRealtimeRouteImport.update({
+    id: '/realtime',
+    path: '/realtime',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleQuizzesRoute =
+  AuthenticatedConsoleQuizzesRouteImport.update({
+    id: '/quizzes',
+    path: '/quizzes',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleProfileRoute =
+  AuthenticatedConsoleProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsolePlaygroundRoute =
+  AuthenticatedConsolePlaygroundRouteImport.update({
+    id: '/playground',
+    path: '/playground',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsolePlansRoute =
+  AuthenticatedConsolePlansRouteImport.update({
+    id: '/plans',
+    path: '/plans',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleNotificationsRoute =
+  AuthenticatedConsoleNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleLogsRoute =
+  AuthenticatedConsoleLogsRouteImport.update({
+    id: '/logs',
+    path: '/logs',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleLessonsRoute =
+  AuthenticatedConsoleLessonsRouteImport.update({
+    id: '/lessons',
+    path: '/lessons',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleLearningRoute =
+  AuthenticatedConsoleLearningRouteImport.update({
+    id: '/learning',
+    path: '/learning',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleInstructorsRoute =
+  AuthenticatedConsoleInstructorsRouteImport.update({
+    id: '/instructors',
+    path: '/instructors',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleGeneratorRoute =
+  AuthenticatedConsoleGeneratorRouteImport.update({
+    id: '/generator',
+    path: '/generator',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleForumRoute =
+  AuthenticatedConsoleForumRouteImport.update({
+    id: '/forum',
+    path: '/forum',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleFinancialRoute =
+  AuthenticatedConsoleFinancialRouteImport.update({
+    id: '/financial',
+    path: '/financial',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleCoursesRoute =
+  AuthenticatedConsoleCoursesRouteImport.update({
+    id: '/courses',
+    path: '/courses',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleCouponsRoute =
+  AuthenticatedConsoleCouponsRouteImport.update({
+    id: '/coupons',
+    path: '/coupons',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleCertificatesRoute =
+  AuthenticatedConsoleCertificatesRouteImport.update({
+    id: '/certificates',
+    path: '/certificates',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleBlogRoute =
+  AuthenticatedConsoleBlogRouteImport.update({
+    id: '/blog',
+    path: '/blog',
+    getParentRoute: () => AuthenticatedConsoleRoute,
+  } as any)
+const AuthenticatedConsoleApiRoute = AuthenticatedConsoleApiRouteImport.update({
+  id: '/api',
+  path: '/api',
+  getParentRoute: () => AuthenticatedConsoleRoute,
+} as any)
+const AuthenticatedConsoleAccountRoute =
+  AuthenticatedConsoleAccountRouteImport.update({
+    id: '/account',
+    path: '/account',
     getParentRoute: () => AuthenticatedConsoleRoute,
   } as any)
 
@@ -774,88 +774,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/chat': {
-      id: '/chat'
-      path: '/chat'
-      fullPath: '/chat'
-      preLoaderRoute: typeof ChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/community': {
-      id: '/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof CommunityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/download': {
-      id: '/download'
-      path: '/download'
-      fullPath: '/download'
-      preLoaderRoute: typeof DownloadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/leaderboard': {
-      id: '/leaderboard'
-      path: '/leaderboard'
-      fullPath: '/leaderboard'
-      preLoaderRoute: typeof LeaderboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/missions': {
-      id: '/missions'
-      path: '/missions'
-      fullPath: '/missions'
-      preLoaderRoute: typeof MissionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/playground': {
-      id: '/playground'
-      path: '/playground'
-      fullPath: '/playground'
-      preLoaderRoute: typeof PlaygroundRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsRouteImport
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/quiz': {
@@ -865,109 +788,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tools': {
-      id: '/tools'
-      path: '/tools'
-      fullPath: '/tools'
-      preLoaderRoute: typeof ToolsRouteImport
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/achievements': {
-      id: '/_authenticated/achievements'
-      path: '/achievements'
-      fullPath: '/achievements'
-      preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/certificates': {
-      id: '/_authenticated/certificates'
-      path: '/certificates'
-      fullPath: '/certificates'
-      preLoaderRoute: typeof AuthenticatedCertificatesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/console': {
-      id: '/_authenticated/console'
-      path: '/console'
-      fullPath: '/console'
-      preLoaderRoute: typeof AuthenticatedConsoleRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/stats': {
-      id: '/_authenticated/stats'
-      path: '/stats'
-      fullPath: '/stats'
-      preLoaderRoute: typeof AuthenticatedStatsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/studio': {
-      id: '/_authenticated/studio'
-      path: '/studio'
-      fullPath: '/studio'
-      preLoaderRoute: typeof AuthenticatedStudioRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/blog/': {
-      id: '/blog/'
-      path: '/blog'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexRouteImport
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/blog/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
+    '/playground': {
+      id: '/playground'
+      path: '/playground'
+      fullPath: '/playground'
+      preLoaderRoute: typeof PlaygroundRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/courses/': {
-      id: '/courses/'
-      path: '/courses'
-      fullPath: '/courses/'
-      preLoaderRoute: typeof CoursesIndexRouteImport
+    '/missions': {
+      id: '/missions'
+      path: '/missions'
+      fullPath: '/missions'
+      preLoaderRoute: typeof MissionsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/courses/$slug': {
-      id: '/courses/$slug'
-      path: '/courses/$slug'
-      fullPath: '/courses/$slug'
-      preLoaderRoute: typeof CoursesSlugRouteImport
+    '/leaderboard': {
+      id: '/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof LeaderboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/learn/': {
-      id: '/learn/'
-      path: '/learn'
-      fullPath: '/learn/'
-      preLoaderRoute: typeof LearnIndexRouteImport
+    '/download': {
+      id: '/download'
+      path: '/download'
+      fullPath: '/download'
+      preLoaderRoute: typeof DownloadRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/learn/$slug': {
-      id: '/learn/$slug'
-      path: '/learn/$slug'
-      fullPath: '/learn/$slug'
-      preLoaderRoute: typeof LearnSlugRouteImport
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lessons/': {
-      id: '/lessons/'
-      path: '/lessons'
-      fullPath: '/lessons/'
-      preLoaderRoute: typeof LessonsIndexRouteImport
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lessons/$id': {
-      id: '/lessons/$id'
-      path: '/lessons/$id'
-      fullPath: '/lessons/$id'
-      preLoaderRoute: typeof LessonsIdRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/paths/': {
@@ -977,11 +879,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PathsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/paths/$slug': {
-      id: '/paths/$slug'
-      path: '/paths/$slug'
-      fullPath: '/paths/$slug'
-      preLoaderRoute: typeof PathsSlugRouteImport
+    '/lessons/': {
+      id: '/lessons/'
+      path: '/lessons'
+      fullPath: '/lessons/'
+      preLoaderRoute: typeof LessonsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learn/': {
+      id: '/learn/'
+      path: '/learn'
+      fullPath: '/learn/'
+      preLoaderRoute: typeof LearnIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/': {
+      id: '/courses/'
+      path: '/courses'
+      fullPath: '/courses/'
+      preLoaderRoute: typeof CoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/verify/$code': {
@@ -991,6 +914,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/paths/$slug': {
+      id: '/paths/$slug'
+      path: '/paths/$slug'
+      fullPath: '/paths/$slug'
+      preLoaderRoute: typeof PathsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lessons/$id': {
+      id: '/lessons/$id'
+      path: '/lessons/$id'
+      fullPath: '/lessons/$id'
+      preLoaderRoute: typeof LessonsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learn/$slug': {
+      id: '/learn/$slug'
+      path: '/learn/$slug'
+      fullPath: '/learn/$slug'
+      preLoaderRoute: typeof LearnSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/$slug': {
+      id: '/courses/$slug'
+      path: '/courses/$slug'
+      fullPath: '/courses/$slug'
+      preLoaderRoute: typeof CoursesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/studio': {
+      id: '/_authenticated/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof AuthenticatedStudioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/stats': {
+      id: '/_authenticated/stats'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof AuthenticatedStatsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/console': {
+      id: '/_authenticated/console'
+      path: '/console'
+      fullPath: '/console'
+      preLoaderRoute: typeof AuthenticatedConsoleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/certificates': {
+      id: '/_authenticated/certificates'
+      path: '/certificates'
+      fullPath: '/certificates'
+      preLoaderRoute: typeof AuthenticatedCertificatesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/achievements': {
+      id: '/_authenticated/achievements'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/console/': {
       id: '/_authenticated/console/'
       path: '/'
@@ -998,172 +998,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConsoleIndexRouteImport
       parentRoute: typeof AuthenticatedConsoleRoute
     }
-    '/_authenticated/console/account': {
-      id: '/_authenticated/console/account'
-      path: '/account'
-      fullPath: '/console/account'
-      preLoaderRoute: typeof AuthenticatedConsoleAccountRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/api': {
-      id: '/_authenticated/console/api'
-      path: '/api'
-      fullPath: '/console/api'
-      preLoaderRoute: typeof AuthenticatedConsoleApiRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/blog': {
-      id: '/_authenticated/console/blog'
-      path: '/blog'
-      fullPath: '/console/blog'
-      preLoaderRoute: typeof AuthenticatedConsoleBlogRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/certificates': {
-      id: '/_authenticated/console/certificates'
-      path: '/certificates'
-      fullPath: '/console/certificates'
-      preLoaderRoute: typeof AuthenticatedConsoleCertificatesRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/coupons': {
-      id: '/_authenticated/console/coupons'
-      path: '/coupons'
-      fullPath: '/console/coupons'
-      preLoaderRoute: typeof AuthenticatedConsoleCouponsRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/courses': {
-      id: '/_authenticated/console/courses'
-      path: '/courses'
-      fullPath: '/console/courses'
-      preLoaderRoute: typeof AuthenticatedConsoleCoursesRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/financial': {
-      id: '/_authenticated/console/financial'
-      path: '/financial'
-      fullPath: '/console/financial'
-      preLoaderRoute: typeof AuthenticatedConsoleFinancialRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/forum': {
-      id: '/_authenticated/console/forum'
-      path: '/forum'
-      fullPath: '/console/forum'
-      preLoaderRoute: typeof AuthenticatedConsoleForumRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/generator': {
-      id: '/_authenticated/console/generator'
-      path: '/generator'
-      fullPath: '/console/generator'
-      preLoaderRoute: typeof AuthenticatedConsoleGeneratorRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/instructors': {
-      id: '/_authenticated/console/instructors'
-      path: '/instructors'
-      fullPath: '/console/instructors'
-      preLoaderRoute: typeof AuthenticatedConsoleInstructorsRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/learning': {
-      id: '/_authenticated/console/learning'
-      path: '/learning'
-      fullPath: '/console/learning'
-      preLoaderRoute: typeof AuthenticatedConsoleLearningRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/lessons': {
-      id: '/_authenticated/console/lessons'
-      path: '/lessons'
-      fullPath: '/console/lessons'
-      preLoaderRoute: typeof AuthenticatedConsoleLessonsRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/logs': {
-      id: '/_authenticated/console/logs'
-      path: '/logs'
-      fullPath: '/console/logs'
-      preLoaderRoute: typeof AuthenticatedConsoleLogsRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/notifications': {
-      id: '/_authenticated/console/notifications'
-      path: '/notifications'
-      fullPath: '/console/notifications'
-      preLoaderRoute: typeof AuthenticatedConsoleNotificationsRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/plans': {
-      id: '/_authenticated/console/plans'
-      path: '/plans'
-      fullPath: '/console/plans'
-      preLoaderRoute: typeof AuthenticatedConsolePlansRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/playground': {
-      id: '/_authenticated/console/playground'
-      path: '/playground'
-      fullPath: '/console/playground'
-      preLoaderRoute: typeof AuthenticatedConsolePlaygroundRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/profile': {
-      id: '/_authenticated/console/profile'
-      path: '/profile'
-      fullPath: '/console/profile'
-      preLoaderRoute: typeof AuthenticatedConsoleProfileRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/quizzes': {
-      id: '/_authenticated/console/quizzes'
-      path: '/quizzes'
-      fullPath: '/console/quizzes'
-      preLoaderRoute: typeof AuthenticatedConsoleQuizzesRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/realtime': {
-      id: '/_authenticated/console/realtime'
-      path: '/realtime'
-      fullPath: '/console/realtime'
-      preLoaderRoute: typeof AuthenticatedConsoleRealtimeRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/repos': {
-      id: '/_authenticated/console/repos'
-      path: '/repos'
-      fullPath: '/console/repos'
-      preLoaderRoute: typeof AuthenticatedConsoleReposRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/security': {
-      id: '/_authenticated/console/security'
-      path: '/security'
-      fullPath: '/console/security'
-      preLoaderRoute: typeof AuthenticatedConsoleSecurityRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/settings': {
-      id: '/_authenticated/console/settings'
-      path: '/settings'
-      fullPath: '/console/settings'
-      preLoaderRoute: typeof AuthenticatedConsoleSettingsRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/students': {
-      id: '/_authenticated/console/students'
-      path: '/students'
-      fullPath: '/console/students'
-      preLoaderRoute: typeof AuthenticatedConsoleStudentsRouteImport
-      parentRoute: typeof AuthenticatedConsoleRoute
-    }
-    '/_authenticated/console/support': {
-      id: '/_authenticated/console/support'
-      path: '/support'
-      fullPath: '/console/support'
-      preLoaderRoute: typeof AuthenticatedConsoleSupportRouteImport
+    '/_authenticated/console/transactions': {
+      id: '/_authenticated/console/transactions'
+      path: '/transactions'
+      fullPath: '/console/transactions'
+      preLoaderRoute: typeof AuthenticatedConsoleTransactionsRouteImport
       parentRoute: typeof AuthenticatedConsoleRoute
     }
     '/_authenticated/console/traffic': {
@@ -1173,11 +1012,172 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConsoleTrafficRouteImport
       parentRoute: typeof AuthenticatedConsoleRoute
     }
-    '/_authenticated/console/transactions': {
-      id: '/_authenticated/console/transactions'
-      path: '/transactions'
-      fullPath: '/console/transactions'
-      preLoaderRoute: typeof AuthenticatedConsoleTransactionsRouteImport
+    '/_authenticated/console/support': {
+      id: '/_authenticated/console/support'
+      path: '/support'
+      fullPath: '/console/support'
+      preLoaderRoute: typeof AuthenticatedConsoleSupportRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/students': {
+      id: '/_authenticated/console/students'
+      path: '/students'
+      fullPath: '/console/students'
+      preLoaderRoute: typeof AuthenticatedConsoleStudentsRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/settings': {
+      id: '/_authenticated/console/settings'
+      path: '/settings'
+      fullPath: '/console/settings'
+      preLoaderRoute: typeof AuthenticatedConsoleSettingsRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/security': {
+      id: '/_authenticated/console/security'
+      path: '/security'
+      fullPath: '/console/security'
+      preLoaderRoute: typeof AuthenticatedConsoleSecurityRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/repos': {
+      id: '/_authenticated/console/repos'
+      path: '/repos'
+      fullPath: '/console/repos'
+      preLoaderRoute: typeof AuthenticatedConsoleReposRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/realtime': {
+      id: '/_authenticated/console/realtime'
+      path: '/realtime'
+      fullPath: '/console/realtime'
+      preLoaderRoute: typeof AuthenticatedConsoleRealtimeRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/quizzes': {
+      id: '/_authenticated/console/quizzes'
+      path: '/quizzes'
+      fullPath: '/console/quizzes'
+      preLoaderRoute: typeof AuthenticatedConsoleQuizzesRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/profile': {
+      id: '/_authenticated/console/profile'
+      path: '/profile'
+      fullPath: '/console/profile'
+      preLoaderRoute: typeof AuthenticatedConsoleProfileRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/playground': {
+      id: '/_authenticated/console/playground'
+      path: '/playground'
+      fullPath: '/console/playground'
+      preLoaderRoute: typeof AuthenticatedConsolePlaygroundRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/plans': {
+      id: '/_authenticated/console/plans'
+      path: '/plans'
+      fullPath: '/console/plans'
+      preLoaderRoute: typeof AuthenticatedConsolePlansRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/notifications': {
+      id: '/_authenticated/console/notifications'
+      path: '/notifications'
+      fullPath: '/console/notifications'
+      preLoaderRoute: typeof AuthenticatedConsoleNotificationsRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/logs': {
+      id: '/_authenticated/console/logs'
+      path: '/logs'
+      fullPath: '/console/logs'
+      preLoaderRoute: typeof AuthenticatedConsoleLogsRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/lessons': {
+      id: '/_authenticated/console/lessons'
+      path: '/lessons'
+      fullPath: '/console/lessons'
+      preLoaderRoute: typeof AuthenticatedConsoleLessonsRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/learning': {
+      id: '/_authenticated/console/learning'
+      path: '/learning'
+      fullPath: '/console/learning'
+      preLoaderRoute: typeof AuthenticatedConsoleLearningRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/instructors': {
+      id: '/_authenticated/console/instructors'
+      path: '/instructors'
+      fullPath: '/console/instructors'
+      preLoaderRoute: typeof AuthenticatedConsoleInstructorsRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/generator': {
+      id: '/_authenticated/console/generator'
+      path: '/generator'
+      fullPath: '/console/generator'
+      preLoaderRoute: typeof AuthenticatedConsoleGeneratorRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/forum': {
+      id: '/_authenticated/console/forum'
+      path: '/forum'
+      fullPath: '/console/forum'
+      preLoaderRoute: typeof AuthenticatedConsoleForumRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/financial': {
+      id: '/_authenticated/console/financial'
+      path: '/financial'
+      fullPath: '/console/financial'
+      preLoaderRoute: typeof AuthenticatedConsoleFinancialRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/courses': {
+      id: '/_authenticated/console/courses'
+      path: '/courses'
+      fullPath: '/console/courses'
+      preLoaderRoute: typeof AuthenticatedConsoleCoursesRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/coupons': {
+      id: '/_authenticated/console/coupons'
+      path: '/coupons'
+      fullPath: '/console/coupons'
+      preLoaderRoute: typeof AuthenticatedConsoleCouponsRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/certificates': {
+      id: '/_authenticated/console/certificates'
+      path: '/certificates'
+      fullPath: '/console/certificates'
+      preLoaderRoute: typeof AuthenticatedConsoleCertificatesRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/blog': {
+      id: '/_authenticated/console/blog'
+      path: '/blog'
+      fullPath: '/console/blog'
+      preLoaderRoute: typeof AuthenticatedConsoleBlogRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/api': {
+      id: '/_authenticated/console/api'
+      path: '/api'
+      fullPath: '/console/api'
+      preLoaderRoute: typeof AuthenticatedConsoleApiRouteImport
+      parentRoute: typeof AuthenticatedConsoleRoute
+    }
+    '/_authenticated/console/account': {
+      id: '/_authenticated/console/account'
+      path: '/account'
+      fullPath: '/console/account'
+      preLoaderRoute: typeof AuthenticatedConsoleAccountRouteImport
       parentRoute: typeof AuthenticatedConsoleRoute
     }
   }
