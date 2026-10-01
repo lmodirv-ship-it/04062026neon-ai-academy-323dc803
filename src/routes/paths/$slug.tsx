@@ -20,7 +20,7 @@ export const Route = createFileRoute("/paths/$slug")({
 });
 
 function PathDetail() {
-  const { path } = Route.useLoaderData();
+  const { path } = Route.useLoaderData() as { path: NonNullable<ReturnType<typeof getAllPaths>[number]> };
   const user = useUser();
   useContent(); // re-render when admin adds lessons
   const pathLessons = getAllLessons().filter((l) => l.pathSlug === path.slug);
